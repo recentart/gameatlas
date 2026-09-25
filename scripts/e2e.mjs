@@ -53,8 +53,10 @@ async function imagesOk(p) {
   // Scroll the page so lazy images load, then check every image decoded.
   await p.eval(`(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } window.scrollTo(0, 0); })()`);
   await p.eval(`(async () => { for (const s of document.querySelectorAll('.strip, [data-continue-list]')) { s.scrollIntoView({ block: 'center' }); for (let x = 0; x <= s.scrollWidth; x += 300) { s.scrollLeft = x; await new Promise(r => setTimeout(r, 30)); } } window.scrollTo(0, 0); })()`);
-  await sleep(700);
-  const bad = await p.eval(`[...document.images].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => i.currentSrc || i.src)`);
+  // Wait (up to 10 s) for every image to finish, rather than a fixed delay, so slow networks don't flake.
+  const pending = `[...document.images].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => i.currentSrc || i.src)`;
+  for (let i = 0; i < 50 && (await p.eval(pending)).length; i++) await sleep(200);
+  const bad = await p.eval(pending);
   assert(!bad.length, `broken/unloaded images: ${bad.slice(0, 5).join(', ')}`);
 }
 async function noHorizontalScroll(p, label) {
@@ -526,7 +528,11 @@ await t('account page: optional, export and import saves', async () => {
   await p.close();
 });
 
-await t('invalid game URL: real 404 status, suggestions for near misses', async () => {
+await t('invalid game URL: real 404 status, suggestions for near misses; trailing slashes redirect', async () => {
+  for (const [from, to] of [['/games/fighting/', '/games/fighting'], ['/discover/', '/discover']]) {
+    const r = await fetch(BASE + from, { redirect: 'manual' });
+    assert([301, 307, 308].includes(r.status) && new URL(r.headers.get('location'), BASE).pathname === to, `${from} -> ${r.status} ${r.headers.get('location')}`);
+  }
   const res = await fetch(`${BASE}/games/paddle-dual`);
   assert(res.status === 404, `status ${res.status}`);
   const p = await open('/games/paddle-dual');

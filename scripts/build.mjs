@@ -384,7 +384,13 @@ out('_headers', `/*
 /play/*
   Cache-Control: public, max-age=3600
 `);
-out('_redirects', `/games /discover 301\n/search /discover 301\n/login /account 301\n/favorites /saved 301\n`);
+// Trailing-slash variants redirect to the canonical URL (drop-trailing-slash only handles folders with index.html).
+const topPages = ['discover', 'categories', 'multiplayer', 'new', 'saved', 'account', 'about'];
+out('_redirects', [
+  '/games /discover 301', '/games/ /discover 301', '/search /discover 301', '/login /account 301', '/favorites /saved 301',
+  ...topPages.map((x) => `/${x}/ /${x} 301`),
+  '/games/:slug/ /games/:slug 301',
+].join('\n') + '\n');
 
 const pageCount = walk(DIST).filter((f) => f.endsWith('.html') && !f.includes(`${join('dist', 'play')}`)).length;
 console.log(`Built ${games.length} games, ${liveCategories.length} category pages, ${pageCount} HTML pages -> dist/ (assets ${version})`);

@@ -40,7 +40,15 @@ export function startServer(port = 8788) {
       res.writeHead(status, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream', ...extra, ...headers });
       res.end(req.method === 'HEAD' ? undefined : readFileSync(file));
     };
-    for (const [from, to, code] of redirects) if (path === from) { res.writeHead(Number(code) || 302, { Location: to + url.search }); return res.end(); }
+    for (const [from, to, code] of redirects) {
+      const names = [];
+      const re = new RegExp(`^${from.replace(/:([a-z]+)/g, (_, n) => { names.push(n); return '([^/]+)'; })}$`);
+      const m = path.match(re);
+      if (!m) continue;
+      const target = names.reduce((t, n, i) => t.replace(`:${n}`, m[i + 1]), to);
+      res.writeHead(Number(code) || 302, { Location: target + url.search });
+      return res.end();
+    }
     if (path.includes('..') || path.includes('/_')) { return send(404, join(DIST, '404.html')); }
     if (path.length > 1 && path.endsWith('/')) {
       const bare = path.slice(0, -1);
