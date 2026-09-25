@@ -1,0 +1,17 @@
+{
+  "name": "gameatlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Organized game discovery with powerful player, genre, multiplayer, platform, and gameplay filters.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "check:sources": "node scripts/check-sources.mjs",
+    "images": "node scripts/render-images.mjs",
+    "deploy": "npx wrangler deploy"
+  },
+  "engines": { "node": ">=22" }
+}

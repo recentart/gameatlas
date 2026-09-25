@@ -1,0 +1,72 @@
+/* Game page */
+.game-page { padding-top: 20px; }
+.game-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px; align-items: start; margin-bottom: 32px; }
+.game-hero.has-player { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.game-cover { margin: 0; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); aspect-ratio: 16 / 9; background: var(--surface-3); }
+.game-cover img { width: 100%; height: 100%; object-fit: cover; }
+.game-head h1 { margin-bottom: 8px; }
+.lede { font-size: 1.1rem; color: var(--text-2); margin-bottom: 14px; }
+.quick-facts { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--text-2); font-size: .95rem; }
+.quick-facts li { display: inline-flex; align-items: center; gap: 7px; }
+.quick-facts .i { width: 18px; height: 18px; color: var(--text-3); }
+.game-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
+.game-actions .save-btn[aria-pressed="true"] { border-color: #e0475b; }
+.source-note { display: flex; gap: 8px; align-items: flex-start; font-size: .88rem; color: var(--text-2); max-width: 60ch; }
+.source-note .i { width: 17px; height: 17px; margin-top: 2px; color: var(--text-3); }
+.has-player .game-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 24px; }
+.has-player .game-head > * { grid-column: 1; }
+.has-player .game-actions { grid-column: 2; grid-row: 1 / span 4; align-self: center; }
+@media (max-width: 899px) {
+  .game-hero { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .has-player .game-head { display: block; }
+}
+
+.game-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; align-items: start; }
+.game-main h2 { font-size: 1.15rem; }
+.prose p { max-width: 68ch; }
+.game-facts { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; position: sticky; top: calc(var(--header-h) + 16px); }
+.facts { margin: 0; display: grid; gap: 0; }
+.facts div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
+.facts div:last-child { border-bottom: 0; }
+.facts dt { color: var(--text-3); font-weight: 600; }
+.facts dd { margin: 0; font-weight: 600; }
+.fact-sub { display: block; font-weight: 400; color: var(--text-2); font-size: .85rem; margin-top: 2px; }
+.facts-note { font-size: .8rem; color: var(--text-3); margin: 10px 0 0; }
+@media (max-width: 899px) {
+  .game-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .game-facts { position: static; order: -1; }
+}
+
+/* ---- player ---- */
+.player { background: #0b0d12; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
+.player-frame { position: relative; aspect-ratio: 16 / 9; max-height: min(72vh, 640px); width: 100%; background: #0b0d12; margin: 0 auto; }
+.player-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #0b0d12; }
+.player-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; filter: blur(2px); }
+.player-start {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border: 0; background: transparent; color: #fff; font-size: 1.25rem; font-weight: 800; width: 100%;
+}
+.player-start small { font-size: .85rem; font-weight: 500; opacity: .85; }
+.player-start-icon { width: 76px; height: 76px; border-radius: 50%; background: var(--accent); color: var(--accent-contrast); display: grid; place-items: center; box-shadow: 0 8px 30px rgb(0 0 0 / 40%); transition: transform var(--t-fast); }
+.player-start-icon .i { width: 34px; height: 34px; margin-left: 4px; }
+.player-start:hover .player-start-icon { transform: scale(1.06); }
+.player-start:focus-visible { outline-offset: -6px; }
+.player-bar { display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 14px; background: var(--surface); border-top: 1px solid var(--border); flex-wrap: wrap; }
+.player-note { margin: 0; font-size: .82rem; color: var(--text-2); display: flex; gap: 6px; align-items: center; }
+.player-note .i { width: 15px; height: 15px; }
+.player-controls { margin-left: auto; display: flex; gap: 6px; }
+.player-bar-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 10px; background: #0b0d12; color: #fff; font-weight: 700; height: 44px; }
+.btn-outline-light { background: transparent; color: #fff; border-color: rgb(255 255 255 / 40%); }
+.btn-outline-light:hover { background: rgb(255 255 255 / 12%); color: #fff; }
+
+/* Real fullscreen: only the game frame is shown. */
+.player-frame:fullscreen { aspect-ratio: auto; max-height: none; width: 100vw; height: 100vh; }
+.player-frame:-webkit-full-screen { aspect-ratio: auto; max-height: none; width: 100vw; height: 100vh; }
+.player-frame:fullscreen .player-poster { display: none; }
+
+/* Fallback for browsers without the Fullscreen API (e.g. iPhone Safari):
+   the player fills the viewport; a slim bar sits above the game, never on it. */
+.player.is-pseudo-fs { position: fixed; inset: 0; z-index: 200; border-radius: 0; border: 0; display: flex; flex-direction: column; }
+.player.is-pseudo-fs .player-frame { flex: 1; aspect-ratio: auto; max-height: none; height: auto; }
+.player.is-pseudo-fs .player-bar { display: none; }
+body.pseudo-fs-open { overflow: hidden; }

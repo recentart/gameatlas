@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dots and Boxes · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/dots-and-boxes/style.css">
+</head>
+<body>
+<div class="stage">
+  <div class="game">
+    <div class="scores" id="scores" aria-live="polite"></div>
+    <svg id="board" class="board" role="group" aria-label="Dots and Boxes board"></svg>
+    <div class="bar"><button class="btn" id="restart" type="button">New game</button></div>
+  </div>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Dots and Boxes</h1>
+    <p>Take turns drawing one line between neighbouring dots. Close the fourth side of a box to claim it and draw again. Most boxes wins.</p>
+    <h2>Players</h2>
+    <div class="options" data-opt="mode"><button data-value="cpu">You vs computer</button><button data-value="2">2 players</button><button data-value="3">3 players</button><button data-value="4">4 players</button></div>
+    <h2>Board</h2>
+    <div class="options" data-opt="size"><button data-value="3">3 × 3</button><button data-value="4">4 × 4</button><button data-value="5">5 × 5</button></div>
+    <h2>Controls</h2>
+    <ul><li>Click or tap between two dots.</li><li><kbd>Tab</kbd> moves between lines, <kbd>Enter</kbd> draws.</li></ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change settings</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/dots-and-boxes/game.js"></script>
+</body>
+</html>

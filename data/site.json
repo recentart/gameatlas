@@ -1,0 +1,22 @@
+{
+  "name": "GameAtlas",
+  "tagline": "Find the right game.",
+  "description": "GameAtlas is an organised game directory. Find games by player count, co-op or versus, local or online, genre, platform, price and session length.",
+  "baseUrl": "https://gameatlas.freewebtoolss.workers.dev",
+  "repoUrl": "https://github.com/recentart/gameatlas",
+  "issuesUrl": "https://github.com/recentart/gameatlas/issues",
+  "searchExamples": ["4 player fighting games", "2 player horror", "party games", "single player games", "quick games", "local racing", "free browser games"],
+  "accounts": {
+    "enabled": false,
+    "note": "No account backend in V1. Everything is stored in the browser; see src/js/lib/account.js for the planned sync interface."
+  },
+  "ads": {
+    "provider": "placeholder",
+    "slots": {
+      "home-mid": { "format": "leaderboard" },
+      "browse-bottom": { "format": "leaderboard" },
+      "game-below": { "format": "leaderboard" },
+      "game-aside": { "format": "rectangle" }
+    }
+  }
+}

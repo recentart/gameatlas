@@ -1,0 +1,7 @@
+.touch { position: fixed; left: 0; right: 0; bottom: 10px; display: flex; justify-content: space-between; padding: 0 12px; z-index: 6; pointer-events: none; }
+.touch div { display: flex; gap: 10px; pointer-events: auto; }
+.touch button { width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgb(255 255 255 / 35%); background: rgb(23 28 39 / 70%); color: #fff; font-size: 1.4rem; touch-action: none; }
+.touch button.on { background: rgb(111 134 255 / 70%); }
+.touch .gas { width: 76px; height: 76px; }
+.results { text-align: left; display: inline-block; margin: 6px auto 0; color: var(--text); font-weight: 700; }
+.results li { margin: 4px 0; }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex Party · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/reflex-party/style.css">
+</head>
+<body>
+<div class="zones" id="zones"></div>
+<div class="center" aria-live="assertive">
+  <p class="rule" id="rule"></p>
+  <p class="signal" id="signal"></p>
+  <p class="sub" id="sub"></p>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Reflex Party</h1>
+    <p>Each player gets one button. Every round has a rule. Press at the right moment to score; press too early or at the wrong moment and you lose a point. First to 5 wins.</p>
+    <h2>Players</h2>
+    <div class="options" data-opt="players"><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>Buttons</h2>
+    <ul>
+      <li><span class="p1">Blue</span> <kbd>Q</kbd> · <span class="p2">Orange</span> <kbd>P</kbd> · <span class="p3">Green</span> <kbd>Z</kbd> · <span class="p4">Pink</span> <kbd>M</kbd></li>
+      <li>On a phone or tablet, each player taps their own corner of the screen.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change players</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/reflex-party/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+body { touch-action: manipulation; }
+.game { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.scores { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; min-height: 34px; }
+.scores .tag { background: #171c27; border: 2px solid #2a3243; padding: 4px 12px; border-radius: 999px; font-weight: 800; font-size: .9rem; }
+.scores .tag.now { border-color: currentColor; background: #212838; }
+.board { width: min(92vw, calc(100vh - 130px)); height: min(92vw, calc(100vh - 130px)); }
+.line { cursor: pointer; }
+.line .hit { stroke: transparent; stroke-width: 26; stroke-linecap: round; }
+.line .vis { stroke: #2b3448; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 2 12; }
+.line:hover .vis, .line:focus .vis { stroke: #8a97b8; stroke-dasharray: none; }
+.line:focus { outline: none; }
+.line:focus-visible .vis { stroke: #a5b4ff; stroke-width: 8; stroke-dasharray: none; }
+.line.taken { cursor: default; }
+.line.taken .vis { stroke-dasharray: none; stroke-width: 7; }
+.line.last .vis { stroke-width: 10; }
+.dot { fill: #eef1f7; }
+.box { opacity: .35; }
+.box-label { font: 800 22px system-ui, sans-serif; fill: #fff; text-anchor: middle; dominant-baseline: central; }

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light Trails · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Light Trails arena" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="polite"></div>
+<p class="pause-note">P to pause</p>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Light Trails</h1>
+    <p>Everyone leaves a solid trail. Don't hit a wall or any trail. Last one moving wins the round; first to 5 rounds wins.</p>
+    <h2>People playing</h2>
+    <div class="options" data-opt="humans"><button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>Total riders (computer fills the rest)</h2>
+    <div class="options" data-opt="total"><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li><span class="p1">Blue</span>: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> (arrow keys too when playing alone)</li>
+      <li><span class="p2">Orange</span>: arrow keys</li>
+      <li><span class="p3">Green</span>: <kbd>I</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></li>
+      <li><span class="p4">Pink</span>: numpad <kbd>8</kbd><kbd>4</kbd><kbd>5</kbd><kbd>6</kbd></li>
+      <li>Touch: swipe to steer Blue. Gamepads control players in order.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change players</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/light-trails/game.js"></script>
+</body>
+</html>

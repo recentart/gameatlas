@@ -1,0 +1,75 @@
+{
+  "genres": [
+    { "id": "action", "label": "Action" },
+    { "id": "adventure", "label": "Adventure" },
+    { "id": "arcade", "label": "Arcade" },
+    { "id": "board", "label": "Board" },
+    { "id": "card", "label": "Card" },
+    { "id": "casual", "label": "Casual" },
+    { "id": "fighting", "label": "Fighting" },
+    { "id": "horror", "label": "Horror" },
+    { "id": "io", "label": ".io" },
+    { "id": "party", "label": "Party" },
+    { "id": "platformer", "label": "Platformer" },
+    { "id": "puzzle", "label": "Puzzle" },
+    { "id": "racing", "label": "Racing" },
+    { "id": "rpg", "label": "RPG" },
+    { "id": "sandbox", "label": "Sandbox" },
+    { "id": "shooter", "label": "Shooter" },
+    { "id": "simulation", "label": "Simulation" },
+    { "id": "sports", "label": "Sports" },
+    { "id": "strategy", "label": "Strategy" },
+    { "id": "survival", "label": "Survival" },
+    { "id": "tower-defense", "label": "Tower Defense" }
+  ],
+  "modes": [
+    { "id": "single", "label": "Single player" },
+    { "id": "local-coop", "label": "Local co-op" },
+    { "id": "local-pvp", "label": "Local versus" },
+    { "id": "online-coop", "label": "Online co-op" },
+    { "id": "online-pvp", "label": "Online versus" },
+    { "id": "team", "label": "Team-based" },
+    { "id": "turn-based", "label": "Turn-based" }
+  ],
+  "modeFilters": [
+    { "id": "single", "label": "Single player" },
+    { "id": "local", "label": "Local multiplayer" },
+    { "id": "online", "label": "Online multiplayer" },
+    { "id": "coop", "label": "Co-op" },
+    { "id": "pvp", "label": "PvP / versus" },
+    { "id": "team", "label": "Team-based" },
+    { "id": "turn-based", "label": "Turn-based" }
+  ],
+  "players": [
+    { "id": "1", "label": "1 player" },
+    { "id": "2", "label": "2 players" },
+    { "id": "3", "label": "3 players" },
+    { "id": "4", "label": "4 players" },
+    { "id": "5+", "label": "5+ players" }
+  ],
+  "platforms": [
+    { "id": "browser", "label": "Browser" },
+    { "id": "pc", "label": "PC" },
+    { "id": "mobile", "label": "Mobile" },
+    { "id": "console", "label": "Console" }
+  ],
+  "price": [
+    { "id": "free", "label": "Free" },
+    { "id": "paid", "label": "Paid" }
+  ],
+  "lengths": [
+    { "id": "under-10", "label": "Under 10 minutes", "short": "Under 10 min" },
+    { "id": "10-30", "label": "10–30 minutes", "short": "10–30 min" },
+    { "id": "30-60", "label": "30–60 minutes", "short": "30–60 min" },
+    { "id": "60-plus", "label": "1+ hour", "short": "1+ hour" }
+  ],
+  "features": [
+    { "id": "play-here", "label": "Play on GameAtlas" },
+    { "id": "no-download", "label": "No download" },
+    { "id": "no-account", "label": "No account required" },
+    { "id": "controller", "label": "Controller support" },
+    { "id": "keyboard", "label": "Keyboard support" },
+    { "id": "mobile-friendly", "label": "Mobile-friendly" },
+    { "id": "family", "label": "Family-friendly" }
+  ]
+}

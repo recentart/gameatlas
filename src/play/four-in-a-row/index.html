@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four in a Row · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/four-in-a-row/style.css">
+</head>
+<body>
+<div class="stage">
+  <div class="game">
+    <p class="turn" id="status" aria-live="polite">Blue to play</p>
+    <div class="board" id="board" role="grid" aria-label="Four in a Row board, 7 columns"></div>
+    <div class="bar"><button class="btn" id="undo" type="button">Undo</button><button class="btn" id="restart" type="button">New game</button></div>
+  </div>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Four in a Row</h1>
+    <p>Drop discs into the columns. Line up four in a row (across, down or diagonally) to win.</p>
+    <h2>Opponent</h2>
+    <div class="options" data-opt="mode"><button data-value="cpu">Computer</button><button data-value="2p">Friend (pass and play)</button></div>
+    <div id="diff-row"><h2>Computer strength</h2>
+      <div class="options" data-opt="diff"><button data-value="1">Easy</button><button data-value="3">Normal</button><button data-value="5">Hard</button></div></div>
+    <h2>Controls</h2>
+    <ul><li>Click or tap a column.</li><li><kbd>←</kbd> <kbd>→</kbd> choose a column, <kbd>Enter</kbd> or <kbd>Space</kbd> drops a disc.</li></ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/four-in-a-row/game.js"></script>
+</body>
+</html>

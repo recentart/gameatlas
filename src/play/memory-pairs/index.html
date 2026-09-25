@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory Pairs · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/memory-pairs/style.css">
+</head>
+<body>
+<div class="stage">
+  <div class="game">
+    <div class="scores" id="scores" aria-live="polite"></div>
+    <div class="board" id="board" role="grid" aria-label="Cards"></div>
+    <div class="bar"><button class="btn" id="restart" type="button">New game</button></div>
+  </div>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Memory Pairs</h1>
+    <p>Turn over two cards at a time. Keep them if they match. With more than one player, a match earns another turn.</p>
+    <h2>Players</h2>
+    <div class="options" data-opt="players"><button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>Board</h2>
+    <div class="options" data-opt="size"><button data-value="8">Small · 16 cards</button><button data-value="12">Medium · 24 cards</button><button data-value="18">Large · 36 cards</button></div>
+    <h2>Controls</h2>
+    <ul><li>Click or tap a card.</li><li>Arrow keys move between cards, <kbd>Enter</kbd> or <kbd>Space</kbd> flips.</li></ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change settings</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/memory-pairs/game.js"></script>
+</body>
+</html>

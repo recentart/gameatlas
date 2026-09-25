@@ -1,0 +1,20 @@
+.zones { position: fixed; inset: 0; display: grid; gap: 4px; padding: 4px; }
+.zones.n2 { grid-template-columns: 1fr 1fr; }
+.zones.n3, .zones.n4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.zone {
+  border: 0; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between; padding: 12px 14px;
+  font-weight: 800; color: #fff; text-align: left; background: color-mix(in srgb, var(--c) 22%, #0d1017);
+  border: 2px solid color-mix(in srgb, var(--c) 55%, transparent); touch-action: manipulation;
+}
+.zone .who { font-size: 1rem; }
+.zone .score { font-size: 2.4rem; line-height: 1; align-self: flex-end; }
+.zone .key { font: 700 .85rem ui-monospace, monospace; opacity: .8; }
+.zone.good { background: color-mix(in srgb, var(--c) 70%, #0d1017); }
+.zone.bad { background: #5a1a22; }
+.zone.z1 { --c: var(--p1); } .zone.z2 { --c: var(--p2); } .zone.z3 { --c: var(--p3); } .zone.z4 { --c: var(--p4); }
+.zones.n4 .z2, .zones.n4 .z4 { text-align: right; }
+.center { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; z-index: 3;
+  background: rgb(13 16 23 / 92%); border-radius: 18px; padding: 16px 26px; min-width: min(420px, 80vw); border: 1px solid #2a3243; }
+.rule { margin: 0; color: var(--text-2); font-weight: 700; font-size: .95rem; }
+.signal { margin: 6px 0; font-size: clamp(2.2rem, 9vw, 4.2rem); font-weight: 900; letter-spacing: -0.02em; min-height: 1.2em; }
+.sub { margin: 0; color: var(--text-2); min-height: 1.4em; }

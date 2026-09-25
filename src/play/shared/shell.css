@@ -1,0 +1,43 @@
+/* Shared styles for GameAtlas Originals (runs inside a sandboxed iframe). */
+:root {
+  --bg: #0d1017; --panel: #171c27; --panel-2: #212838; --text: #eef1f7; --text-2: #aab3c5;
+  --accent: #6f86ff; --p1: #4f86ff; --p2: #ff8a3d; --p3: #37c98a; --p4: #f45fae; --danger: #ff6b6b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; overflow: hidden; }
+body { -webkit-user-select: none; user-select: none; touch-action: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid #a5b4ff; outline-offset: 2px; }
+[hidden] { display: none !important; }
+.stage { position: fixed; inset: 0; display: grid; place-items: center; }
+canvas { display: block; background: #0b0e14; touch-action: none; }
+
+.overlay {
+  position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; z-index: 10;
+  background: rgb(8 10 16 / 78%);
+}
+.panel {
+  width: min(520px, 100%); max-height: 100%; overflow: auto; background: var(--panel); border-radius: 16px;
+  padding: 22px 22px 18px; box-shadow: 0 20px 60px rgb(0 0 0 / 50%); border: 1px solid #2a3243;
+}
+.panel h1 { margin: 0 0 4px; font-size: 1.6rem; letter-spacing: -0.02em; }
+.panel h2 { margin: 16px 0 8px; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-2); }
+.panel p { margin: 0 0 10px; color: var(--text-2); }
+.panel ul { margin: 0 0 8px; padding-left: 1.1em; color: var(--text-2); font-size: .92rem; }
+.panel kbd { font: 700 .8em ui-monospace, Consolas, monospace; padding: 1px 5px; border-radius: 4px; background: var(--panel-2); border: 1px solid #39425a; color: var(--text); }
+.options { display: flex; flex-wrap: wrap; gap: 6px; }
+.opt { border: 1px solid #39425a; background: var(--panel-2); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: .92rem; }
+.opt[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #0d1017; }
+.actions { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.btn { border: 0; border-radius: 10px; padding: 11px 20px; font-weight: 800; background: var(--panel-2); }
+.btn-primary { background: var(--accent); color: #0d1017; }
+.btn:hover { filter: brightness(1.1); }
+
+.hud { position: fixed; top: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 10px; pointer-events: none; z-index: 5; font-weight: 800; flex-wrap: wrap; padding: 0 8px; }
+.hud .tag { background: rgb(23 28 39 / 85%); border: 1px solid #2a3243; padding: 4px 12px; border-radius: 999px; font-size: .9rem; }
+.pause-note { position: fixed; bottom: 8px; right: 10px; color: var(--text-2); font-size: .75rem; z-index: 5; pointer-events: none; }
+.status { text-align: center; }
+.p1 { color: var(--p1); } .p2 { color: var(--p2); } .p3 { color: var(--p3); } .p4 { color: var(--p4); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.actions.center { justify-content: center; }

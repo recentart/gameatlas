@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loop Racer · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/loop-racer/style.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Loop Racer track" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="off"></div>
+<p class="pause-note">P to pause</p>
+<div class="touch" id="touch" hidden>
+  <div class="tl"><button type="button" data-k="left" aria-label="Steer left">◀</button><button type="button" data-k="right" aria-label="Steer right">▶</button></div>
+  <div class="tr"><button type="button" data-k="brake" aria-label="Brake">■</button><button type="button" data-k="gas" class="gas" aria-label="Accelerate">▲</button></div>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Loop Racer</h1>
+    <p>Three laps against computer cars. Stay on the tarmac: grass slows you right down.</p>
+    <h2>Drivers</h2>
+    <div class="options" data-opt="humans"><button data-value="1">1 player</button><button data-value="2">2 players</button></div>
+    <h2>Computer pace</h2>
+    <div class="options" data-opt="pace"><button data-value="0.84">Relaxed</button><button data-value="0.92">Normal</button><button data-value="0.99">Fast</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li><span class="p1">Blue</span>: <kbd>W</kbd> accelerate, <kbd>A</kbd>/<kbd>D</kbd> steer, <kbd>S</kbd> brake (arrow keys too when alone)</li>
+      <li><span class="p2">Orange</span>: arrow keys</li>
+      <li>Gamepad: stick to steer, A / right trigger to accelerate, B / left trigger to brake. Touch: on-screen buttons.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start race</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><ol class="results" id="results"></ol>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Race again</button><button class="btn" id="tomenu" type="button">Change settings</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/loop-racer/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+body { touch-action: manipulation; }
+.game { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.scores { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; min-height: 34px; }
+.scores .tag { background: #171c27; border: 2px solid #2a3243; padding: 4px 12px; border-radius: 999px; font-weight: 800; font-size: .9rem; }
+.scores .tag.now { border-color: currentColor; background: #212838; }
+.board { display: grid; gap: 8px; }
+.card { width: var(--s); height: var(--s); perspective: 600px; border: 0; padding: 0; background: transparent; border-radius: 12px; }
+.card .in { display: block; position: relative; width: 100%; height: 100%; transition: transform 260ms; transform-style: preserve-3d; }
+.card.up .in, .card.done .in { transform: rotateY(180deg); }
+.card .f, .card .b { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; display: grid; place-items: center; }
+.card .b { background: #26304a; border: 2px solid #34405f; }
+.card .b::after { content: ""; width: 34%; height: 34%; border-radius: 50%; border: 3px solid #3e4c72; }
+.card .f { background: #eef1f7; transform: rotateY(180deg); }
+.card .f svg { width: 64%; height: 64%; }
+.card.done .f { background: #cfd6e6; opacity: .75; }
+.card:focus-visible { outline: 3px solid #a5b4ff; outline-offset: 3px; }

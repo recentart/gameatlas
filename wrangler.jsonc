@@ -1,0 +1,17 @@
+{
+  // Static site on Cloudflare Workers static assets (no Worker script).
+  // `npx wrangler deploy` runs the build first, then uploads ./dist.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gameatlas",
+  "compatibility_date": "2026-09-01",
+  "build": {
+    "command": "node scripts/build.mjs"
+  },
+  "assets": {
+    "directory": "./dist",
+    // /games/fighting serves dist/games/fighting.html; /games/fighting/ redirects to it.
+    "html_handling": "drop-trailing-slash",
+    // Unknown paths get dist/404.html with a real 404 status.
+    "not_found_handling": "404-page"
+  }
+}
