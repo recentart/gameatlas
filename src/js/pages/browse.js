@@ -239,6 +239,7 @@ export async function init() {
   window.matchMedia('(min-width: 900px)').addEventListener?.('change', (m) => { if (m.matches) setDrawer(false); });
 
   render();
+  root.dataset.ready = '1'; // catalog loaded and filters live (used by tests)
   if (new URLSearchParams(location.search).get('focus') === 'search') q.focus();
 }
 

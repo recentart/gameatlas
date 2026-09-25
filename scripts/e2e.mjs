@@ -102,6 +102,7 @@ await t('home: instant suggestions understand "4 player fighting" and keyboard s
 
 await t('discover: instant search without reload, natural queries', async () => {
   const p = await open('/discover');
+  await p.waitFor(`document.querySelector('[data-browse]').dataset.ready === '1'`, 15000);
   await p.eval('window.__noReload = 1');
   assert((await count(p)) === games.length, 'all games listed');
   const cases = [
@@ -371,7 +372,7 @@ for (const g of games.filter((x) => x.embedAllowed)) {
     await p.waitFor(`document.querySelector('[data-player] iframe')`);
     const q = PROBES[g.slug] || { act: '', ok: 'true' };
     const inFrame = (expr) => p.evalFrame(`/play/${g.slug}`, expr);
-    for (let i = 0; i < 40; i++) { try { if (await inFrame(`!!(window.GA && document.getElementById('start'))`)) break; } catch { /* frame loading */ } await sleep(100); }
+    for (let i = 0; i < 100; i++) { try { if (await inFrame(`document.readyState === 'complete' && !!window.GA && !!document.getElementById('start')`)) break; } catch { /* frame loading */ } await sleep(100); }
     // Give the game focus the way a player's click would (games pause when they lose focus).
     await p.eval(`document.querySelector('[data-player] iframe').focus()`);
     await inFrame(`window.focus(); document.getElementById('start').click()`);

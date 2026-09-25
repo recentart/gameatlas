@@ -253,5 +253,12 @@
   GA.clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   GA.rand = function (a, b) { return a + Math.random() * (b - a); };
 
+  // Keep Start disabled until the game's own script has loaded (slow connections).
+  var startBtn = document.getElementById('start');
+  if (startBtn) {
+    startBtn.disabled = true;
+    window.addEventListener('load', function () { startBtn.disabled = false; if (!document.getElementById('menu').hidden) startBtn.focus(); });
+  }
+
   window.GA = GA;
 })();
