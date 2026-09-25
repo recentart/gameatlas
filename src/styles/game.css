@@ -70,3 +70,9 @@
 .player.is-pseudo-fs .player-frame { flex: 1; aspect-ratio: auto; max-height: none; height: auto; }
 .player.is-pseudo-fs .player-bar { display: none; }
 body.pseudo-fs-open { overflow: hidden; }
+
+/* Board-style games get a taller player on phones; wide games keep 16:9 (and suggest rotating). */
+@media (max-width: 640px) {
+  .player-board .player-frame { aspect-ratio: 4 / 5; max-height: 78vh; }
+  .player-board .player-poster { object-fit: cover; }
+}

@@ -191,6 +191,7 @@
   touchEl.addEventListener('pointerup', release);
   touchEl.addEventListener('pointercancel', release);
 
+  GA.rotateHint();
   var loop = GA.loop(update, draw);
   GA.autoPause(loop, function () { return state === 'race' || state === 'countdown'; });
   document.getElementById('start').addEventListener('click', newRace);

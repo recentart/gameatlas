@@ -41,3 +41,12 @@ canvas { display: block; background: #0b0e14; touch-action: none; }
 .p1 { color: var(--p1); } .p2 { color: var(--p2); } .p3 { color: var(--p3); } .p4 { color: var(--p4); }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 .actions.center { justify-content: center; }
+
+/* Controller focus is always visible (programmatic focus may not trigger :focus-visible). */
+.pad-active :focus { outline: 3px solid #a5b4ff; outline-offset: 3px; }
+.rotate-hint { display: none; margin: 10px 0 0; font-size: .85rem; color: #ffd48a; }
+@media (orientation: portrait) and (pointer: coarse) { .rotate-hint { display: block; } }
+/* On-screen D-pad for touch screens (Light Trails). */
+.dpad { position: fixed; left: 12px; bottom: 12px; display: grid; grid-template-columns: repeat(3, 56px); grid-template-rows: repeat(3, 56px); gap: 4px; z-index: 6; }
+.dpad button { border-radius: 12px; border: 2px solid rgb(255 255 255 / 35%); background: rgb(23 28 39 / 70%); color: #fff; font-size: 1.2rem; touch-action: none; }
+.dpad .u { grid-column: 2; grid-row: 1; } .dpad .l { grid-column: 1; grid-row: 2; } .dpad .r { grid-column: 3; grid-row: 2; } .dpad .d { grid-column: 2; grid-row: 3; }

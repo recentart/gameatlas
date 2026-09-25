@@ -262,14 +262,14 @@ export function gamePage(ctx, game, similar) {
     : `<a class="btn btn-primary btn-lg" href="${e(game.sourceUrl)}" target="_blank" rel="noopener" data-play-external="${e(game.slug)}">${icon('play')}Play game<span class="btn-sub">on ${e(game.sourceName === 'Official site' ? host : game.sourceName)}</span>${icon('external', 'i-ext')}</a>`;
 
   const media = embedded
-    ? `<section class="player" id="play" aria-label="${e(game.title)} game player" data-player data-src="${e(game.embedUrl)}" data-title="${e(game.title)}" data-slug="${e(game.slug)}">
+    ? `<section class="player${game.embedShape === 'board' ? ' player-board' : ''}" id="play" aria-label="${e(game.title)} game player" data-player data-src="${e(game.embedUrl)}" data-title="${e(game.title)}" data-slug="${e(game.slug)}">
 <div class="player-bar-top" data-exit-bar hidden><span>${e(game.title)}</span><button type="button" class="btn btn-sm btn-outline-light" data-fullscreen-exit>${icon('minimize')}Exit fullscreen</button></div>
 <div class="player-frame" data-player-frame>
 <img class="player-poster" src="/covers/${e(game.slug)}.svg" alt="" width="640" height="360">
 <button type="button" class="player-start" data-player-start><span class="player-start-icon">${icon('play')}</span><span>Play ${e(game.title)}</span><small>Runs in this page · no download</small></button>
 </div>
 <div class="player-bar">
-<p class="player-note">${icon('info')}Click the game to give it keyboard focus. Press <kbd>P</kbd> to pause.</p>
+<p class="player-note">${icon('info')}Click the game to give it keyboard focus. <kbd>P</kbd> or controller Start pauses; controller Select returns to the page.</p>
 <div class="player-controls">
 <button type="button" class="btn btn-sm btn-quiet" data-player-restart disabled>${icon('turn')}Restart</button>
 <button type="button" class="btn btn-sm btn-outline" data-fullscreen disabled aria-pressed="false">${icon('maximize')}<span>Fullscreen</span></button>

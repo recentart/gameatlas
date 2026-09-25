@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  GA.padMode = 'dom';
   var COLS = 7, ROWS = 6;
   var boardEl = document.getElementById('board'), statusEl = document.getElementById('status');
   var menu = document.getElementById('menu');

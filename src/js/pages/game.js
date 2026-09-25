@@ -74,5 +74,14 @@ export function init() {
   player.querySelector('[data-fullscreen-exit]').addEventListener('click', exitPseudo);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && player.classList.contains('is-pseudo-fs')) exitPseudo(); });
 
+  // Controller: the game's Select button hands control back to the page.
+  window.addEventListener('message', (ev) => {
+    if (!iframe || ev.source !== iframe.contentWindow || ev.data?.type !== 'ga:leave-game') return;
+    if (fsElement()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    if (player.classList.contains('is-pseudo-fs')) exitPseudo();
+    document.documentElement.classList.add('pad-active');
+    fsBtn.focus();
+  });
+
   if (location.hash === '#play') start();
 }

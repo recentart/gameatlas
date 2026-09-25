@@ -135,14 +135,17 @@
     for (var i = 0; i < e.touches.length; i++) {
       var t = e.touches[i];
       var pt = GA.toLogical(canvas, W, H, t.clientX, t.clientY);
-      var side = opts.mode === 'cpu' ? 0 : (pt.x < W / 2 ? 0 : 1);
+      var side = opts.mode === 'cpu' ? 0 : (t.clientX < window.innerWidth / 2 ? 0 : 1);
       p[side].touchY = pt.y;
     }
   }
-  canvas.addEventListener('touchstart', touch, { passive: false });
-  canvas.addEventListener('touchmove', touch, { passive: false });
-  canvas.addEventListener('touchend', touch, { passive: false });
+  var stage = document.querySelector('.stage');
+  stage.addEventListener('touchstart', touch, { passive: false });
+  stage.addEventListener('touchmove', touch, { passive: false });
+  stage.addEventListener('touchend', touch, { passive: false });
 
+  GA.rotateHint();
+  GA.debug = function () { return { state: state, p1: p[0].y }; };
   var loop = GA.loop(update, draw);
   GA.autoPause(loop, function () { return state === 'play'; });
   document.getElementById('start').addEventListener('click', newGame);

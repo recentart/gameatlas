@@ -108,6 +108,10 @@
       }
     }
   }
+  // Controller N's A button is player N's button.
+  GA.onPad(function (pad, button) {
+    if (button === 'a' && active && menu.hidden && over.hidden) { press(pad); return true; }
+  });
   window.addEventListener('keydown', function (e) {
     if (e.repeat) return;
     var i = KEYS.indexOf(e.code);

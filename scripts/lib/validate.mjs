@@ -50,6 +50,7 @@ export function validateCatalog({ games, taxonomy, categories }) {
     if (typeof g.sourceUrl !== 'string' || !/^https:\/\//.test(g.sourceUrl)) errors.push(`${at}: sourceUrl must be https`);
     if (g.embedAllowed) {
       if (g.embedUrl !== `/play/${g.slug}`) errors.push(`${at}: embedAllowed needs a local /play/<slug> embedUrl (only self-hosted, permitted games are embedded)`);
+      if (g.embedShape !== undefined && !['wide', 'board'].includes(g.embedShape)) errors.push(`${at}: embedShape must be wide or board`);
     } else if (g.embedUrl) errors.push(`${at}: embedUrl set but embedAllowed is false`);
     if (g.steamAppId !== undefined && !String(g.sourceUrl).includes(`/app/${g.steamAppId}/`) && g.sourceName === 'Steam') errors.push(`${at}: steamAppId does not match sourceUrl`);
     if (g.summary && g.summary.length > 110) errors.push(`${at}: summary longer than 110 characters (${g.summary.length})`);

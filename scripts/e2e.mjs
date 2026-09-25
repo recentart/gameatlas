@@ -419,6 +419,78 @@ await t('gameplay: computer replies in Four in a Row and Dots and Boxes; cards f
   await p.close();
 });
 
+
+// A scriptable fake controller (DevTools has no gamepad emulation). Runs in the page and in iframes.
+const FAKE_PAD = `(() => {
+  const pad = { id: 'Test pad (STANDARD GAMEPAD)', index: 0, connected: true, mapping: 'standard', axes: [0, 0, 0, 0], buttons: Array.from({ length: 17 }, () => ({ pressed: false, value: 0 })), timestamp: 0 };
+  window.__pad = pad;
+  Object.defineProperty(Navigator.prototype, 'getGamepads', { value: () => [pad], configurable: true });
+  window.__press = async (n, ms = 90) => { pad.buttons[n].pressed = true; pad.buttons[n].value = 1; await new Promise(r => setTimeout(r, ms)); pad.buttons[n].pressed = false; pad.buttons[n].value = 0; await new Promise(r => setTimeout(r, 90)); };
+  addEventListener('load', () => { const e = new Event('gamepadconnected'); e.gamepad = pad; dispatchEvent(e); });
+})();`;
+const BTN = { a: 0, b: 1, y: 3, select: 8, start: 9, up: 12, down: 13, left: 14, right: 15 };
+
+await t('controller: browse the site (D-pad moves focus, A selects, Y opens search, B closes)', async () => {
+  const p = await open('/discover', { init: FAKE_PAD });
+  await sleep(200);
+  await p.eval(`__press(${BTN.down})`);
+  const first = await p.eval(`document.activeElement !== document.body`);
+  assert(first, 'D-pad focuses something');
+  assert(await p.eval(`document.documentElement.classList.contains('pad-active')`), 'controller focus styling on');
+  await p.eval(`document.querySelector('input[name=players][value="2"]').focus()`);
+  const before = await count(p);
+  await p.eval(`__press(${BTN.a})`);
+  await sleep(200);
+  assert(await p.eval(`document.querySelector('input[name=players][value="2"]').checked`), 'A toggles the focused filter');
+  assert((await count(p)) < before, 'results updated');
+  await p.eval(`__press(${BTN.right})`);
+  assert(await p.eval(`document.activeElement.matches('input[name=players][value="3"]')`), 'D-pad right moves to the next player pill');
+  await p.eval(`__press(${BTN.y})`);
+  await sleep(150);
+  assert(await p.eval(`document.querySelector('#search-dialog').open`), 'Y opens search');
+  await p.eval(`__press(${BTN.b})`);
+  await sleep(150);
+  assert(!(await p.eval(`document.querySelector('#search-dialog').open`)), 'B closes it');
+  await noErrors(p, 'pad site');
+  await p.close();
+});
+
+await t('controller: play Four in a Row and Paddle Duel with a gamepad, Select returns to the page', async () => {
+  let p = await open('/games/four-in-a-row', { init: FAKE_PAD });
+  await clickSel(p, '.player-start');
+  await p.waitFor(`document.querySelector('[data-player] iframe')`);
+  const inF = (x) => p.evalFrame('/play/four-in-a-row', x);
+  for (let i = 0; i < 40; i++) { try { if (await inF(`!!window.__press && !!document.getElementById('start')`)) break; } catch { /* loading */ } await sleep(100); }
+  await inF(`document.getElementById('start').focus()`);
+  await inF(`__press(${BTN.a})`);
+  await sleep(200);
+  assert(await inF(`document.getElementById('menu').hidden`), 'A on Start starts the game');
+  await inF(`__press(${BTN.right})`);
+  await inF(`__press(${BTN.a})`);
+  await sleep(250);
+  assert(await inF(`document.querySelectorAll('.cell.p0').length === 1`), 'D-pad + A drops a disc');
+  await p.close();
+
+  p = await open('/games/paddle-duel', { init: FAKE_PAD });
+  await clickSel(p, '.player-start');
+  await p.waitFor(`document.querySelector('[data-player] iframe')`);
+  const inP = (x) => p.evalFrame('/play/paddle-duel', x);
+  for (let i = 0; i < 40; i++) { try { if (await inP(`!!window.__press && !!window.GA && !!GA.debug`)) break; } catch { /* loading */ } await sleep(100); }
+  await inP(`document.getElementById('start').focus()`);
+  await inP(`__press(${BTN.a})`);
+  await sleep(200);
+  const y0 = await inP(`GA.debug().p1`);
+  await inP(`(async () => { __pad.axes[1] = 1; await new Promise(r => setTimeout(r, 500)); __pad.axes[1] = 0; })()`);
+  const y1 = await inP(`GA.debug().p1`);
+  assert(y1 > y0 + 40, `stick moves the paddle (${y0} -> ${y1})`);
+  await p.eval(`document.querySelector('[data-player] iframe').focus()`);
+  await inP(`__press(${BTN.select})`);
+  await sleep(200);
+  assert(await p.eval(`document.activeElement.matches('[data-fullscreen]')`), 'Select hands focus back to the page');
+  await noErrors(p, 'pad games');
+  await p.close();
+});
+
 await t('recently played lists external opens too', async () => {
   const p = await open('/games/lichess');
   await p.eval(`(() => { const a = document.querySelector('[data-play-external]'); a.addEventListener('click', e => e.preventDefault()); a.click(); })()`);

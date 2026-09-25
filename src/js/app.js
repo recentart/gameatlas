@@ -3,6 +3,7 @@
 import { createStore, STORAGE_KEY } from './lib/storage.js';
 import { initAds } from './ui/ads.js';
 import { initSearchDialog, initHeroSearch } from './ui/searchbox.js';
+import { initGamepadNav } from './ui/gamepad.js';
 
 function localStorageOrThrowing() {
   try { return window.localStorage; } catch {
@@ -120,6 +121,7 @@ const openSearch = initSearchDialog();
 initShortcut(openSearch);
 initHeroSearch();
 initAds();
+initGamepadNav({ onFirstConnect: () => toast('Controller connected: D-pad moves, A selects, B goes back, Y searches.') });
 
 const PAGES = {
   browse: () => import('./pages/browse.js'),

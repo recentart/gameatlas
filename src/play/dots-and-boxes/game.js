@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  GA.padMode = 'dom';
   var svg = document.getElementById('board'), scoresEl = document.getElementById('scores');
   var menu = document.getElementById('menu'), over = document.getElementById('over');
   var opts = GA.options(menu, { mode: 'cpu', size: 4 });
@@ -136,6 +137,8 @@
     take(g.getAttribute('data-id'));
   });
   svg.addEventListener('keydown', function (e) {
+    var dir = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' }[e.key];
+    if (dir) { e.preventDefault(); GA.moveFocus(dir, svg); return; }
     if (e.key !== 'Enter' && e.key !== ' ') return;
     var g = e.target.closest('.line');
     if (!g || (isCpu && turn === 1)) return;

@@ -269,3 +269,8 @@
 .callout { background: var(--accent-soft); border-radius: var(--radius-lg); padding: 18px 20px; margin: 16px 0 8px; }
 .callout p:last-child { margin: 0; }
 .form-status { min-height: 1.5em; font-weight: 600; }
+
+/* Controller navigation (src/js/ui/gamepad.js): focus is always visible and generous. */
+.pad-active :focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+.pad-active .check:focus-within, .pad-active .pill:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.pad-active .card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus); }

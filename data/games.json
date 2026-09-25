@@ -25,7 +25,7 @@
     "controls": "Click or tap a column. Keyboard: ← / → to choose a column, Enter or Space to drop.",
     "tags": ["pass and play", "classic", "abstract"],
     "sourceName": "GameAtlas Originals", "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/four-in-a-row",
-    "embedAllowed": true, "embedUrl": "/play/four-in-a-row", "featured": true, "added": "2026-09-25"
+    "embedAllowed": true, "embedUrl": "/play/four-in-a-row", "embedShape": "board", "featured": true, "added": "2026-09-25"
   },
   {
     "slug": "light-trails", "title": "Light Trails", "developer": "GameAtlas Originals", "released": 2026,
@@ -53,7 +53,7 @@
     "controls": "P1: Q. P2: P. P3: Z. P4: M. On touch screens each player taps their own corner.",
     "tags": ["one button", "same screen", "phone party game"],
     "sourceName": "GameAtlas Originals", "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/reflex-party",
-    "embedAllowed": true, "embedUrl": "/play/reflex-party", "featured": true, "added": "2026-09-25"
+    "embedAllowed": true, "embedUrl": "/play/reflex-party", "embedShape": "board", "featured": true, "added": "2026-09-25"
   },
   {
     "slug": "memory-pairs", "title": "Memory Pairs", "developer": "GameAtlas Originals", "released": 2026,
@@ -67,7 +67,7 @@
     "controls": "Click or tap a card. Keyboard: arrow keys to move, Enter or Space to flip.",
     "tags": ["pass and play", "memory", "kids"],
     "sourceName": "GameAtlas Originals", "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/memory-pairs",
-    "embedAllowed": true, "embedUrl": "/play/memory-pairs", "added": "2026-09-25"
+    "embedAllowed": true, "embedUrl": "/play/memory-pairs", "embedShape": "board", "added": "2026-09-25"
   },
   {
     "slug": "dots-and-boxes", "title": "Dots and Boxes", "developer": "GameAtlas Originals", "released": 2026,
@@ -81,7 +81,7 @@
     "controls": "Click or tap between two dots. Keyboard: Tab moves between lines, Enter draws.",
     "tags": ["pass and play", "pencil and paper", "classic"],
     "sourceName": "GameAtlas Originals", "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/dots-and-boxes",
-    "embedAllowed": true, "embedUrl": "/play/dots-and-boxes", "added": "2026-09-25"
+    "embedAllowed": true, "embedUrl": "/play/dots-and-boxes", "embedShape": "board", "added": "2026-09-25"
   },
   {
     "slug": "loop-racer", "title": "Loop Racer", "developer": "GameAtlas Originals", "released": 2026,

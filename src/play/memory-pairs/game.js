@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  GA.padMode = 'dom';
   var SHAPES = {
     circle: '<circle cx="50" cy="50" r="36"/>',
     square: '<rect x="16" y="16" width="68" height="68" rx="8"/>',

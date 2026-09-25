@@ -181,8 +181,9 @@
   }
   // Swipe steering for player 1.
   var sx = 0, sy = 0;
-  canvas.addEventListener('touchstart', function (e) { e.preventDefault(); sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: false });
-  canvas.addEventListener('touchmove', function (e) {
+  var stage = document.querySelector('.stage');
+  stage.addEventListener('touchstart', function (e) { e.preventDefault(); sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: false });
+  stage.addEventListener('touchmove', function (e) {
     e.preventDefault();
     var dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 24 || !riders[0]) return;
@@ -190,6 +191,10 @@
     sx = e.touches[0].clientX; sy = e.touches[0].clientY;
   }, { passive: false });
 
+  GA.rotateHint();
+  var dpad = document.getElementById('dpad');
+  if (window.matchMedia('(pointer: coarse)').matches) dpad.hidden = false;
+  dpad.addEventListener('pointerdown', function (e) { var b = e.target.closest('[data-d]'); if (b && riders[0]) { e.preventDefault(); queueTurn(riders[0], b.getAttribute('data-d')); } });
   var loop = GA.loop(update, draw);
   GA.autoPause(loop, function () { return state === 'play' || state === 'between'; });
   document.getElementById('start').addEventListener('click', newMatch);
