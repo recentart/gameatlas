@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brick Breaker · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Brick Breaker playfield" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="polite"></div>
+<p class="pause-note">P or Start to pause</p>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Brick Breaker</h1>
+    <p>Bounce the ball off your paddle to clear every brick. Where the ball hits the paddle sets its angle. Three lives; each level is a little faster.</p>
+    <h2>Difficulty</h2>
+    <div class="options" data-opt="diff"><button data-value="0.85">Easy</button><button data-value="1">Normal</button><button data-value="1.2">Hard</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li>Mouse or touch: move the paddle; click or tap to launch.</li>
+      <li>Keyboard: <kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd>, <kbd>Space</kbd> to launch.</li>
+      <li>Controller: stick or D-pad to move, A to launch.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Settings</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/brick-breaker/game.js"></script>
+</body>
+</html>

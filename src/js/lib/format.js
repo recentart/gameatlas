@@ -50,3 +50,13 @@ export function priceLabel(game) {
 export function yearLabel(game) {
   return game.released ? String(game.released) : 'Unknown';
 }
+
+/**
+ * Image for a game. `game.art` is set by the build when official artwork (or, for
+ * GameAtlas Originals, a gameplay screenshot) exists in assets/games; otherwise the
+ * generated SVG cover is used.
+ */
+export function imageFor(game, size = 640) {
+  if (game.art) return { src: `/img/games/${game.slug}-${size}.webp`, srcset: `/img/games/${game.slug}-320.webp 320w, /img/games/${game.slug}-640.webp 640w` };
+  return { src: `/covers/${game.slug}.svg`, srcset: '' };
+}

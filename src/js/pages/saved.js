@@ -2,7 +2,7 @@
 import { store, refreshSaves } from '../app.js';
 import { loadCatalog } from '../lib/catalog.js';
 import { renderCard } from '../ui/card.js';
-import { escapeHtml as e } from '../lib/format.js';
+import { escapeHtml as e, imageFor } from '../lib/format.js';
 import { icon } from '../ui/icons.js';
 
 const HINT_THRESHOLD = 3;
@@ -31,7 +31,7 @@ export async function init() {
     $('[data-account-hint]').hidden = favs.length < HINT_THRESHOLD || s.prefs.accountHintDismissed;
 
     const recent = s.recent.map((r) => ({ ...r, game: cat.bySlug[r.slug] })).filter((r) => r.game);
-    $('[data-recent-list]').innerHTML = recent.map(({ game, at }) => `<li><img src="/covers/${e(game.slug)}.svg" alt="" width="80" height="45" loading="lazy"><span class="r-main"><a href="/games/${e(game.slug)}">${e(game.title)}</a><span class="r-sub">${game.embedAllowed ? 'Played here' : `Opened on ${e(game.sourceName === 'Official site' ? 'the official site' : game.sourceName)}`} · ${ago(at)}</span></span></li>`).join('');
+    $('[data-recent-list]').innerHTML = recent.map(({ game, at }) => `<li><img src="${e(imageFor(game, 320).src)}" alt="" width="80" height="45" loading="lazy"><span class="r-main"><a href="/games/${e(game.slug)}">${e(game.title)}</a><span class="r-sub">${game.embedAllowed ? 'Played here' : `Opened on ${e(game.sourceName === 'Official site' ? 'the official site' : game.sourceName)}`} · ${ago(at)}</span></span></li>`).join('');
     $('[data-recent-empty]').hidden = recent.length > 0;
     $('[data-clear-recent]').hidden = recent.length === 0;
 

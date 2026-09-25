@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serpent · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Serpent playfield" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="polite"></div>
+<p class="pause-note">P or Start to pause</p>
+<div class="dpad" id="dpad" hidden><button type="button" class="u" data-d="up" aria-label="Up">▲</button><button type="button" class="l" data-d="left" aria-label="Left">◀</button><button type="button" class="r" data-d="right" aria-label="Right">▶</button><button type="button" class="d" data-d="down" aria-label="Down">▼</button></div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Serpent</h1>
+    <p>Eat the fruit to grow longer. Don't hit the walls, yourself or the other snake. In versus, the last snake moving wins the round; first to 3 wins.</p>
+    <h2>Mode</h2>
+    <div class="options" data-opt="mode"><button data-value="solo">1 player</button><button data-value="versus">2 players (versus)</button></div>
+    <h2>Speed</h2>
+    <div class="options" data-opt="speed"><button data-value="7">Relaxed</button><button data-value="10">Normal</button><button data-value="14">Fast</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li><span class="p1">Blue</span>: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> (arrow keys too when playing alone)</li>
+      <li><span class="p2">Orange</span>: arrow keys</li>
+      <li>Touch: swipe or use the on-screen pad. Controllers: D-pad or stick, one per player.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change mode</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/serpent/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mine Field · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/mine-field/style.css">
+</head>
+<body>
+<div class="stage">
+  <div class="game">
+    <div class="bar top"><span class="tag" id="mines">Mines 10</span><button class="btn mode" id="mode" type="button" aria-pressed="false">Tap to: Reveal</button><span class="tag" id="time">0:00</span></div>
+    <div class="board" id="board" role="grid" aria-label="Mine field"></div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <div class="bar"><button class="btn" id="restart" type="button">New game</button></div>
+  </div>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Mine Field</h1>
+    <p>Reveal every safe square without hitting a mine. A number tells you how many mines touch that square. Flag the squares you think hide mines. Your first reveal is always safe.</p>
+    <h2>Size</h2>
+    <div class="options" data-opt="size"><button data-value="9">Small · 9×9, 10 mines</button><button data-value="12">Medium · 12×12, 22 mines</button><button data-value="16">Large · 16×16, 40 mines</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li>Click to reveal, right-click to flag. Touch: tap to reveal, long-press to flag, or switch the Tap button to Flag.</li>
+      <li>Keyboard: arrow keys move, <kbd>Enter</kbd> reveals, <kbd>F</kbd> flags.</li>
+      <li>Controller: D-pad moves, A reveals, X flags.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change size</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/mine-field/game.js"></script>
+</body>
+</html>

@@ -23,6 +23,14 @@ const site = json('data/site.json');
 const taxonomy = json('data/taxonomy.json');
 const categories = json('data/categories.json');
 const games = json('data/games.json');
+const imageManifest = existsSync(join(ROOT, 'data/images.json')) ? json('data/images.json') : {};
+// Official artwork (or gameplay screenshots for Originals) from scripts/fetch-images.mjs / capture-originals.mjs.
+for (const g of games) {
+  if (imageManifest[g.slug] && existsSync(join(ROOT, 'assets/games', `${g.slug}-640.webp`)) && existsSync(join(ROOT, 'assets/games', `${g.slug}-320.webp`))) {
+    g.art = true;
+    g.artCredit = imageManifest[g.slug].credit;
+  }
+}
 
 // ---- validate -------------------------------------------------------------
 const { errors, warnings, counts } = validateCatalog({ games, taxonomy, categories });
@@ -65,7 +73,7 @@ const jsFiles = walk(join(ROOT, 'src/js')).filter((f) => f.endsWith('.js'));
 const jsBundleKey = jsFiles.map((f) => readFileSync(f, 'utf8')).join('\n');
 
 const clientGames = games.map((g) => {
-  const { description, controls, added, ...rest } = g; // page-only fields stay out of the catalog
+  const { description, controls, added, artCredit, ...rest } = g; // page-only fields stay out of the catalog
   return rest;
 });
 const catalog = {
@@ -98,11 +106,13 @@ const page = (path, p) => out(path, layout(ctx, p));
 for (const g of games) out(`covers/${g.slug}.svg`, coverSvg(g));
 for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) if (existsSync(join(ROOT, 'assets', f))) copyFileSync(join(ROOT, 'assets', f), join(DIST, f));
 if (existsSync(join(ROOT, 'assets/og'))) copyDir('assets/og', 'og');
+if (existsSync(join(ROOT, 'assets/games'))) copyDir('assets/games', 'img/games');
 // Source SVGs for the OG renderer (tools/render-images.mjs turns them into PNGs).
 mkdirSync(join(ROOT, '.cache/og-src'), { recursive: true });
 for (const g of games) {
   const og = { ...g, ogLine: `${playersText(g)} · ${g.genres.map((x) => genreLabels[x]).join(' · ')}` };
-  writeFileSync(join(ROOT, '.cache/og-src', `${g.slug}.svg`), coverSvg(og, { og: true }));
+  const art = g.art ? `data:image/webp;base64,${readFileSync(join(ROOT, 'assets/games', `${g.slug}-640.webp`)).toString('base64')}` : null;
+  writeFileSync(join(ROOT, '.cache/og-src', `${g.slug}.svg`), coverSvg(og, { og: true, image: art }));
 }
 writeFileSync(join(ROOT, '.cache/og-src', 'site.svg'), siteOgSvg(site, games.length));
 function playersText(g) { const p = g.players; return p.max === null ? `${p.min}+ players` : p.min === p.max ? `${p.min} player${p.min > 1 ? 's' : ''}` : `${p.min}–${p.max}${p.plus ? '+' : ''} players`; }
@@ -374,6 +384,9 @@ out('_headers', `/*
 
 /data/*
   Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=604800
 
 /covers/*
   Cache-Control: public, max-age=86400

@@ -129,7 +129,7 @@ function fitTitle(title, maxWidth, sizes) {
   return { size, lines: wrap(title, maxWidth, size).slice(0, 3) };
 }
 
-export function coverSvg(game, { og = false } = {}) {
+export function coverSvg(game, { og = false, image = null } = {}) {
   const W = og ? 1200 : 640, H = og ? 630 : 360;
   const genre = game.genres[0];
   const seed = hash(game.slug);
@@ -157,13 +157,15 @@ export function coverSvg(game, { og = false } = {}) {
   const y0 = og ? H - pad - blockH - 40 : (H - blockH) / 2 + size * 0.8;
   const text = lines.map((l, i) => `<tspan x="${x}" y="${r1(y0 + i * lineH + (og ? size * 0.8 : 0))}">${e(l)}</tspan>`).join('');
   const shade = `<rect width="${W}" height="${H}" fill="url(#fade)"/>`;
-  const brand = og ? `<g transform="translate(${W - pad - 250} ${pad - 8})"><rect width="48" height="48" rx="12" fill="#fff"/><path d="M13.5 32 24 11l10.5 21M17.4 24.8h13.2" fill="none" stroke="${c.bg}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="37" r="2.6" fill="${c.bg}"/><text x="62" y="36" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#fff">GameAtlas</text></g>` : '';
+  const brand = og ? `<g transform="translate(${W - pad - 250} ${image ? H - pad - 40 : pad - 8})"><rect width="48" height="48" rx="12" fill="#fff"/><path d="M13.5 32 24 11l10.5 21M17.4 24.8h13.2" fill="none" stroke="${c.bg}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="37" r="2.6" fill="${c.bg}"/><text x="62" y="36" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#fff">GameAtlas</text></g>` : '';
   const subtitle = og ? `<text x="${pad}" y="${H - pad}" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="30" font-weight="500" fill="#fff" fill-opacity=".82">${e(game.ogLine || '')}</text>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
-<defs><linearGradient id="fade" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="${c.dark}" stop-opacity=".85"/><stop offset=".55" stop-color="${c.dark}" stop-opacity="0"/></linearGradient></defs>
-<rect width="${W}" height="${H}" fill="${c.bg}"/>
+<defs><linearGradient id="fadeUp" x1="0" x2="0" y1="1" y2="0"><stop offset="0" stop-color="#080a10" stop-opacity=".94"/><stop offset=".55" stop-color="#080a10" stop-opacity=".35"/><stop offset="1" stop-color="#080a10" stop-opacity="0"/></linearGradient><linearGradient id="fade" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="${c.dark}" stop-opacity=".85"/><stop offset=".55" stop-color="${c.dark}" stop-opacity="0"/></linearGradient></defs>
+${image
+    ? `<image href="${image}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice"/><rect width="${W}" height="${H}" fill="url(#fadeUp)"/>`
+    : `<rect width="${W}" height="${H}" fill="${c.bg}"/>
 <g transform="scale(${scale})">${art}</g>
-${shade}
+${shade}`}
 <text font-family="Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="${size}" font-weight="800" fill="#fff" letter-spacing="-0.5">${text}</text>
 ${subtitle}${brand}
 </svg>`;

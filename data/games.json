@@ -99,6 +99,262 @@
   },
 
   {
+    "slug": "serpent",
+    "title": "Serpent",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Classic snake: eat, grow, and don’t crash. Solo, or two snakes head to head.",
+    "description": "Steer a growing snake around the field, eating fruit without hitting the walls or your own tail. Alone, it speeds up as you grow and tracks your best length. With two players, both snakes share the field and the last one moving wins the round; first to three rounds takes the match.",
+    "players": {
+      "min": 1,
+      "max": 2,
+      "local": 2
+    },
+    "modes": [
+      "single",
+      "local-pvp"
+    ],
+    "genres": [
+      "arcade",
+      "casual"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "under-10",
+    "controls": "P1: W A S D (arrows too when alone). P2: arrow keys. Touch: swipe or on-screen pad. Controllers: D-pad or stick. P or Start pauses.",
+    "tags": [
+      "snake",
+      "same keyboard",
+      "retro"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/serpent",
+    "embedAllowed": true,
+    "embedUrl": "/play/serpent",
+    "added": "2026-09-25"
+  },
+  {
+    "slug": "brick-breaker",
+    "title": "Brick Breaker",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Bounce a ball off your paddle to smash every brick across four layouts.",
+    "description": "Keep the ball in play and aim it at the bricks: where it hits your paddle decides the angle. Tough bricks take two hits, each cleared layout is a little faster, and you have three lives. Play with a mouse, a finger, the keyboard or a controller.",
+    "players": {
+      "min": 1,
+      "max": 1
+    },
+    "modes": [
+      "single"
+    ],
+    "genres": [
+      "arcade",
+      "action"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "under-10",
+    "controls": "Mouse or touch: move the paddle, click or tap to launch. Keyboard: arrow keys or A/D, Space to launch. Controller: stick or D-pad, A to launch.",
+    "tags": [
+      "breakout-style",
+      "retro",
+      "high score"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/brick-breaker",
+    "embedAllowed": true,
+    "embedUrl": "/play/brick-breaker",
+    "added": "2026-09-25"
+  },
+  {
+    "slug": "air-hockey",
+    "title": "Air Hockey",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Fast table hockey for one or two. On a tablet, each player drags a mallet on their half.",
+    "description": "Knock the puck into the other goal and defend your own. Play the computer at three difficulty levels, or put a phone or tablet between two people: each finger controls the mallet on its own half of the table. Keyboards and controllers work too. First to seven wins.",
+    "players": {
+      "min": 1,
+      "max": 2,
+      "local": 2
+    },
+    "modes": [
+      "single",
+      "local-pvp"
+    ],
+    "genres": [
+      "sports",
+      "arcade"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "under-10",
+    "controls": "Touch: drag your mallet (left half Blue, right half Orange). Mouse: Blue. Keyboard: W A S D Blue, arrow keys Orange. Controllers: left stick.",
+    "tags": [
+      "multi-touch",
+      "tablet",
+      "same screen"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/air-hockey",
+    "embedAllowed": true,
+    "embedUrl": "/play/air-hockey",
+    "added": "2026-09-25"
+  },
+  {
+    "slug": "mine-field",
+    "title": "Mine Field",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Clear the board without touching a mine, using the numbers as clues.",
+    "description": "Every revealed square shows how many mines touch it. Use those numbers to work out where the mines are, flag them, and reveal everything else. The first square you open is always safe. Three board sizes, with long-press flagging on phones.",
+    "players": {
+      "min": 1,
+      "max": 1
+    },
+    "modes": [
+      "single"
+    ],
+    "genres": [
+      "puzzle",
+      "casual"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "under-10",
+    "controls": "Click to reveal, right-click to flag. Touch: tap to reveal, long-press or Flag mode to flag. Keyboard: arrows, Enter, F. Controller: D-pad, A reveal, X flag.",
+    "tags": [
+      "logic",
+      "classic",
+      "minesweeper-style"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/mine-field",
+    "embedAllowed": true,
+    "embedUrl": "/play/mine-field",
+    "added": "2026-09-25",
+    "embedShape": "board"
+  },
+  {
+    "slug": "block-drop",
+    "title": "Block Drop",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Turn and drop falling blocks to complete rows before the pile reaches the top.",
+    "description": "Pieces of four blocks fall into the well. Move and rotate them so they fill whole rows: full rows vanish and score points, and clearing several at once scores more. The pieces speed up every ten rows. A preview shows the next three pieces.",
+    "players": {
+      "min": 1,
+      "max": 1
+    },
+    "modes": [
+      "single"
+    ],
+    "genres": [
+      "puzzle",
+      "arcade"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "10-30",
+    "controls": "Keyboard: arrows move and turn, Down soft drop, Space hard drop. Controller: D-pad, A turn, B hard drop. Touch: on-screen buttons.",
+    "tags": [
+      "falling blocks",
+      "high score",
+      "endless"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/block-drop",
+    "embedAllowed": true,
+    "embedUrl": "/play/block-drop",
+    "added": "2026-09-25",
+    "embedShape": "board"
+  },
+  {
+    "slug": "tank-duel",
+    "title": "Tank Duel",
+    "developer": "GameAtlas Originals",
+    "released": 2026,
+    "summary": "Turn-based artillery for two to four tanks: set angle and power, allow for the wind, fire.",
+    "description": "Tanks take turns firing shells across rolling hills. Adjust the barrel angle and power, watch the wind, and blast craters into the ground. Mix people and computer tanks in any combination up to four; players share one keyboard, controller or screen. The last tank standing wins.",
+    "players": {
+      "min": 1,
+      "max": 4,
+      "local": 4
+    },
+    "modes": [
+      "single",
+      "local-pvp",
+      "turn-based"
+    ],
+    "genres": [
+      "strategy",
+      "action"
+    ],
+    "platforms": [
+      "browser"
+    ],
+    "price": "free",
+    "downloadRequired": false,
+    "accountRequired": false,
+    "controllerSupport": true,
+    "keyboardSupport": true,
+    "mobileFriendly": true,
+    "familyFriendly": true,
+    "sessionLength": "under-10",
+    "controls": "Keyboard: left/right aim, up/down power, Space fire. Controller: stick or D-pad, A fire. Touch: on-screen buttons. Players take turns.",
+    "tags": [
+      "artillery",
+      "pass and play",
+      "bots"
+    ],
+    "sourceName": "GameAtlas Originals",
+    "sourceUrl": "https://github.com/recentart/gameatlas/tree/main/src/play/tank-duel",
+    "embedAllowed": true,
+    "embedUrl": "/play/tank-duel",
+    "added": "2026-09-25"
+  },
+
+  {
     "slug": "brawlhalla", "title": "Brawlhalla", "developer": "Blue Mammoth Games", "released": 2017,
     "summary": "Free-to-play platform fighter where you knock opponents off the stage.",
     "description": "A platform fighter in which damage makes opponents easier to launch, and the goal is to knock them off the stage. Matches range from one-on-one to eight-player free-for-alls, with couch play, online matchmaking and cross-play between platforms.",

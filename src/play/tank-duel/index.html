@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tank Duel · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/tank-duel/style.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Tank Duel battlefield" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="polite"></div>
+<p class="pause-note">P or Start to pause</p>
+<div class="aim" id="aim" hidden>
+  <button type="button" data-a="angle-" aria-label="Aim left">↺</button>
+  <button type="button" data-a="angle+" aria-label="Aim right">↻</button>
+  <button type="button" data-a="power-" aria-label="Less power">−</button>
+  <button type="button" data-a="power+" aria-label="More power">+</button>
+  <button type="button" data-a="fire" class="fire" aria-label="Fire">FIRE</button>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Tank Duel</h1>
+    <p>Take turns lobbing shells across the hills. Set the angle and power, allow for the wind, and fire. Shots blast craters in the ground. The last tank standing wins.</p>
+    <h2>Tanks</h2>
+    <div class="options" data-opt="tanks"><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>People playing (computer drives the rest)</h2>
+    <div class="options" data-opt="humans"><button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button><button data-value="4">4</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li>Keyboard: <kbd>←</kbd> <kbd>→</kbd> aim, <kbd>↑</kbd> <kbd>↓</kbd> power, <kbd>Space</kbd> fire. Players take turns on one keyboard.</li>
+      <li>Controller: stick or D-pad to aim and set power, A to fire.</li>
+      <li>Touch: the buttons at the bottom.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change players</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/tank-duel/game.js"></script>
+</body>
+</html>

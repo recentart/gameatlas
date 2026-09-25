@@ -1,0 +1,4 @@
+.aim { position: fixed; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 8px; z-index: 6; }
+.aim button { min-width: 54px; height: 54px; border-radius: 14px; border: 2px solid rgb(255 255 255 / 30%); background: rgb(23 28 39 / 80%); color: #fff; font-size: 1.3rem; font-weight: 800; touch-action: none; }
+.aim .fire { min-width: 84px; background: #d9432f; border-color: #ff8a73; }
+.aim button.on { filter: brightness(1.3); }

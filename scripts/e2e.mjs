@@ -353,6 +353,12 @@ const PROBES = {
   'four-in-a-row': { act: `document.querySelector('[data-col="3"]').click()`, ok: `document.querySelectorAll('.cell.p0').length === 1 && document.querySelectorAll('.cell.p1').length === 1` },
   'memory-pairs': { act: `document.querySelector('[data-i="0"]').click(); document.querySelector('[data-i="1"]').click()`, ok: `/Moves 1/.test(document.querySelector('#scores').textContent)` },
   'dots-and-boxes': { act: `document.querySelector('.line[data-id="h-0-0"]').dispatchEvent(new MouseEvent('click', { bubbles: true }))`, ok: `document.querySelectorAll('.line.taken').length === 2` },
+  'serpent': { act: '', ok: 'GA.updates > 30 && GA.debug().state === "play"' },
+  'brick-breaker': { act: `GA.keys.Space = true`, ok: 'GA.updates > 30 && GA.debug().stuck === false' },
+  'air-hockey': { act: '', ok: 'GA.updates > 30' },
+  'mine-field': { act: `document.querySelector('[data-i="40"]').click()`, ok: 'GA.debug().open > 0' },
+  'block-drop': { act: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }))`, ok: 'GA.debug().filled >= 4' },
+  'tank-duel': { act: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' })); GA.keys.Space = true`, ok: 'GA.debug().shell === true || GA.debug().turn !== 0' },
   'reflex-party': { act: '', ok: `document.querySelector('#rule').textContent.length > 5 && document.querySelectorAll('.zone').length === 2` },
 };
 for (const g of games.filter((x) => x.embedAllowed)) {

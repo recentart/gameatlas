@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Block Drop · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+<link rel="stylesheet" href="/play/block-drop/style.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Block Drop well" role="img"></canvas></div>
+<p class="pause-note">P or Start to pause</p>
+<div class="pad-row" id="touch" hidden>
+  <button type="button" data-k="left" aria-label="Move left">◀</button>
+  <button type="button" data-k="rotate" aria-label="Rotate">⟳</button>
+  <button type="button" data-k="right" aria-label="Move right">▶</button>
+  <button type="button" data-k="down" aria-label="Soft drop">▼</button>
+  <button type="button" data-k="drop" aria-label="Hard drop">⤓</button>
+</div>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Block Drop</h1>
+    <p>Falling blocks: move and turn each piece so it fills whole rows. Full rows clear and score points; clear several at once for more. The game ends when the pile reaches the top.</p>
+    <h2>Starting speed</h2>
+    <div class="options" data-opt="level"><button data-value="1">Level 1</button><button data-value="5">Level 5</button><button data-value="10">Level 10</button></div>
+    <h2>Controls</h2>
+    <ul>
+      <li>Keyboard: <kbd>←</kbd> <kbd>→</kbd> move, <kbd>↑</kbd> or <kbd>X</kbd> turn, <kbd>Z</kbd> turn back, <kbd>↓</kbd> soft drop, <kbd>Space</kbd> hard drop.</li>
+      <li>Controller: D-pad moves and drops, A turns, B hard drops.</li>
+      <li>Touch: the buttons under the well.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Settings</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/block-drop/game.js"></script>
+</body>
+</html>

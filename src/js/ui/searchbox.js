@@ -4,7 +4,7 @@
 import { loadCatalog } from '../lib/catalog.js';
 import { search } from '../lib/search.js';
 import { emptyFilters } from '../lib/filters.js';
-import { escapeHtml as e, playersLabel, modeSummary } from '../lib/format.js';
+import { escapeHtml as e, playersLabel, modeSummary, imageFor } from '../lib/format.js';
 
 export function interpretText(parsed) {
   if (!parsed.chips.length) return '';
@@ -47,7 +47,7 @@ function attachCombobox({ input, list, interpret, popup = false, max = 6 }) {
     items = [...top.map((g) => ({ href: `/games/${g.slug}`, game: g })), { href: allUrl(), all: true, count: r.results.length }];
     list.innerHTML = items.map((it, i) => it.all
       ? `<li role="option" id="${list.id}-o${i}" aria-selected="false" data-href="${e(it.href)}"><span class="s-all">${it.count ? `See all ${it.count} result${it.count === 1 ? '' : 's'}` : 'No matches — browse all games'} for “${e(q)}” →</span></li>`
-      : `<li role="option" id="${list.id}-o${i}" aria-selected="false" data-href="${e(it.href)}"><img src="/covers/${e(it.game.slug)}.svg" alt="" width="64" height="36"><span><span class="s-title">${e(it.game.title)}</span><span class="s-meta">${e(playersLabel(it.game.players))} · ${e(modeSummary(it.game))} · ${e(it.game.genres.map((g) => cat.genreLabels[g]).slice(0, 2).join(', '))}</span></span></li>`).join('');
+      : `<li role="option" id="${list.id}-o${i}" aria-selected="false" data-href="${e(it.href)}"><img src="${e(imageFor(it.game, 320).src)}" alt="" width="64" height="36"><span><span class="s-title">${e(it.game.title)}</span><span class="s-meta">${e(playersLabel(it.game.players))} · ${e(modeSummary(it.game))} · ${e(it.game.genres.map((g) => cat.genreLabels[g]).slice(0, 2).join(', '))}</span></span></li>`).join('');
     if (interpret) {
       const html = interpretText(r.parsed);
       interpret.innerHTML = r.fallback ? `${html} <span>(no exact keyword match)</span>` : html;

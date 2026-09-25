@@ -1,6 +1,6 @@
 // HTML templates for every page. Node-only; the browser re-renders dynamic parts
 // with the same shared modules (card.js, format.js, filters.js).
-import { escapeHtml as e, playersLabel, modeSummary, labelMap, listLabel } from '../../src/js/lib/format.js';
+import { escapeHtml as e, playersLabel, modeSummary, labelMap, listLabel, imageFor } from '../../src/js/lib/format.js';
 import { facetCount, filterGames, emptyFilters, mergeFilters, GROUPS } from '../../src/js/lib/filters.js';
 import { renderCard, hostOf } from '../../src/js/ui/card.js';
 import { SPRITE, icon, PLATFORM_ICON } from '../../src/js/ui/icons.js';
@@ -265,7 +265,7 @@ export function gamePage(ctx, game, similar) {
     ? `<section class="player${game.embedShape === 'board' ? ' player-board' : ''}" id="play" aria-label="${e(game.title)} game player" data-player data-src="${e(game.embedUrl)}" data-title="${e(game.title)}" data-slug="${e(game.slug)}">
 <div class="player-bar-top" data-exit-bar hidden><span>${e(game.title)}</span><button type="button" class="btn btn-sm btn-outline-light" data-fullscreen-exit>${icon('minimize')}Exit fullscreen</button></div>
 <div class="player-frame" data-player-frame>
-<img class="player-poster" src="/covers/${e(game.slug)}.svg" alt="" width="640" height="360">
+<img class="player-poster" src="${e(imageFor(game).src)}" alt="" width="640" height="360">
 <button type="button" class="player-start" data-player-start><span class="player-start-icon">${icon('play')}</span><span>Play ${e(game.title)}</span><small>Runs in this page · no download</small></button>
 </div>
 <div class="player-bar">
@@ -276,7 +276,7 @@ export function gamePage(ctx, game, similar) {
 </div>
 </div>
 </section>`
-    : `<figure class="game-cover"><img src="/covers/${e(game.slug)}.svg" alt="" width="640" height="360"></figure>`;
+    : `<figure class="game-cover"><img src="${e(imageFor(game).src)}" alt="${e(game.title)} artwork" width="640" height="360">${game.artCredit ? `<figcaption>${e(game.artCredit)}</figcaption>` : ''}</figure>`;
 
   const facts = [
     ['Players', `${e(playersLabel(p))}${playersDetail ? `<span class="fact-sub">${e(playersDetail)}</span>` : ''}`],

@@ -1,6 +1,6 @@
 // Game card markup. Shared by the static build and the browser so server- and
 // client-rendered grids are identical.
-import { escapeHtml, playersLabel, modeSummary } from '../lib/format.js';
+import { escapeHtml, playersLabel, modeSummary, imageFor } from '../lib/format.js';
 import { icon, PLATFORM_ICON } from './icons.js';
 
 const PLATFORM_LABEL = { browser: 'Browser', pc: 'PC', mobile: 'Mobile', console: 'Console' };
@@ -18,6 +18,7 @@ export function renderCard(game, { genreLabels = {}, showYear = false, headingLe
   const genres = game.genres.slice(0, 2).map((g) => genreLabels[g] || g).join(' · ');
   const platforms = game.platforms.map((p) => PLATFORM_LABEL[p]).join(' · ');
   const act = playAction(game);
+  const img = imageFor(game);
   const h = `h${headingLevel}`;
   const playHere = act.kind === 'here' ? `<span class="badge badge-here">${icon('play')}Play here</span>` : '';
   const year = showYear && game.released ? `<span class="badge badge-year">${game.released}</span>` : '';
@@ -25,7 +26,7 @@ export function renderCard(game, { genreLabels = {}, showYear = false, headingLe
     ? ` href="${e(act.href)}" target="_blank" rel="noopener" data-play-external="${e(game.slug)}" aria-label="Play ${e(game.title)} on ${e(hostOf(game.sourceUrl))} (opens in a new tab)"`
     : ` href="${e(act.href)}" aria-label="${act.label} ${e(game.title)}"`;
   return `<li class="card-item"><article class="card" data-slug="${e(game.slug)}">
-<div class="card-media"><img src="/covers/${e(game.slug)}.svg" alt="" width="640" height="360" loading="lazy" decoding="async"></div>
+<div class="card-media"><img src="${e(img.src)}"${img.srcset ? ` srcset="${e(img.srcset)}" sizes="(max-width: 559px) 136px, 320px"` : ''} alt="" width="640" height="360" loading="lazy" decoding="async"></div>
 <div class="card-body">
 <${h} class="card-title"><a href="${url}">${e(game.title)}</a></${h}>
 <p class="card-summary">${e(game.summary)}</p>

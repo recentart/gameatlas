@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Air Hockey · GameAtlas Originals</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/play/shared/shell.css">
+</head>
+<body>
+<div class="stage"><canvas id="c" aria-label="Air hockey table" role="img"></canvas></div>
+<div class="hud" id="hud" aria-live="polite"></div>
+<p class="pause-note">P or Start to pause</p>
+<div class="overlay" id="menu">
+  <div class="panel">
+    <h1>Air Hockey</h1>
+    <p>Knock the puck into the other goal. First to 7 wins. Great on a tablet with a friend: each of you drags a mallet on your own half.</p>
+    <h2>Mode</h2>
+    <div class="options" data-opt="mode"><button data-value="cpu">1 player vs computer</button><button data-value="2p">2 players</button></div>
+    <div id="diff-row"><h2>Computer</h2>
+    <div class="options" data-opt="diff"><button data-value="easy">Easy</button><button data-value="normal">Normal</button><button data-value="hard">Hard</button></div></div>
+    <h2>Controls</h2>
+    <ul>
+      <li>Touch: drag your mallet (left half is <span class="p1">Blue</span>, right half is <span class="p2">Orange</span>).</li>
+      <li>Mouse: move <span class="p1">Blue</span>. Keyboard: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Blue, arrow keys Orange.</li>
+      <li>Controllers: left stick, one per player.</li>
+    </ul>
+    <div class="actions"><button class="btn btn-primary" id="start" type="button" autofocus>Start</button></div>
+  </div>
+</div>
+<div class="overlay" id="over" hidden>
+  <div class="panel status"><h1 id="winner"></h1><p id="final"></p>
+  <div class="actions center"><button class="btn btn-primary" id="again" type="button">Play again</button><button class="btn" id="tomenu" type="button">Change mode</button></div></div>
+</div>
+<script src="/play/shared/shell.js"></script>
+<script src="/play/air-hockey/game.js"></script>
+</body>
+</html>

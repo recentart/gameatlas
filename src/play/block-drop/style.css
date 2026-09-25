@@ -1,0 +1,4 @@
+.pad-row { position: fixed; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 8px; z-index: 6; }
+.pad-row button { width: 58px; height: 58px; border-radius: 14px; border: 2px solid rgb(255 255 255 / 30%); background: rgb(23 28 39 / 80%); color: #fff; font-size: 1.4rem; touch-action: none; }
+.pad-row button.on { background: rgb(111 134 255 / 70%); }
+@media (pointer: coarse) { .stage { bottom: 74px; } }
