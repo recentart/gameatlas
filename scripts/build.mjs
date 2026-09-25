@@ -325,7 +325,8 @@ page('about.html', {
 <h2>How games are listed</h2>
 <ul>
 <li>Every listing links to the game's official source: its store page, official site or publisher page. That link is shown on each game page.</li>
-<li>Descriptions are written for GameAtlas. We don't copy store text, screenshots or artwork. Cover images are original artwork generated for this site.</li>
+<li>Descriptions are written for GameAtlas; we don't copy store text.</li>
+<li>Game pictures are the publishers' official artwork, taken from the game's Steam store page or official site and credited on each game page. They are used only to identify the game. GameAtlas Originals show real gameplay screenshots. If you own an image and want it changed or removed, <a href="${e(site.issuesUrl)}" rel="noopener">tell us</a>.</li>
 <li>Facts such as player counts, modes, platforms and price come from the official store listing or the developer, and were checked on the date shown on each page. They can change, so please <a href="${e(site.issuesUrl)}" rel="noopener">report anything out of date</a>.</li>
 <li>Listing a game doesn't mean GameAtlas owns, sells or hosts it.</li>
 </ul>

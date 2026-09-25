@@ -231,11 +231,14 @@ await t('mobile: filter drawer slides out, traps focus, filters, closes with Esc
 
 await t('responsive: no horizontal scrolling on phone and tablet', async () => {
   for (const [w, h, mobile] of [[390, 844, true], [360, 740, true], [768, 1024, true], [1024, 768, false]]) {
-    for (const path of ['/', '/discover', '/games/fighting', '/games/paddle-duel', '/games/baldurs-gate-3', '/saved', '/categories', '/about', '/account']) {
-      const p = await open(path, { width: w, height: h, mobile });
+    // One tab per screen size (opening dozens of tabs in a row can crash Node's WebSocket on Windows).
+    const p = await open('/', { width: w, height: h, mobile });
+    for (const path of ['/', '/discover', '/games/fighting', '/games/paddle-duel', '/games/air-hockey', '/games/baldurs-gate-3', '/saved', '/categories', '/about', '/account']) {
+      await p.goto(BASE + path);
+      await sleep(150);
       await noHorizontalScroll(p, `${path} @${w}`);
-      await p.close();
     }
+    await p.close();
   }
 });
 
@@ -369,7 +372,9 @@ for (const g of games.filter((x) => x.embedAllowed)) {
     const q = PROBES[g.slug] || { act: '', ok: 'true' };
     const inFrame = (expr) => p.evalFrame(`/play/${g.slug}`, expr);
     for (let i = 0; i < 40; i++) { try { if (await inFrame(`!!(window.GA && document.getElementById('start'))`)) break; } catch { /* frame loading */ } await sleep(100); }
-    await inFrame(`document.getElementById('start').click()`);
+    // Give the game focus the way a player's click would (games pause when they lose focus).
+    await p.eval(`document.querySelector('[data-player] iframe').focus()`);
+    await inFrame(`window.focus(); document.getElementById('start').click()`);
     await sleep(300);
     if (q.act) await inFrame(q.act);
     let ok = false;

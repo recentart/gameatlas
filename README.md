@@ -4,7 +4,9 @@
 
 Live: https://gameatlas.freewebtoolss.workers.dev
 
-- 131 games: 124 listed from their official sources, plus 7 **GameAtlas Originals** you can play on the site (with fullscreen).
+- 184 games: 171 listed from their official sources, plus 13 **GameAtlas Originals** you can play on the site (with fullscreen), each playable with keyboard/mouse, touch or a controller.
+- Official artwork for every listed game; real gameplay screenshots for the Originals.
+- The whole site can be browsed with a game controller (D-pad, A, B, Y, LB/RB).
 - 43 category pages (only categories with at least 3 games get a page).
 - Natural search without AI: "4 player fighting", "2 player horror", "local racing", "free browser games".
 - Favourites, recently played and saved searches in the browser. No account needed.
@@ -16,9 +18,11 @@ Live: https://gameatlas.freewebtoolss.workers.dev
 node scripts/build.mjs          # validate data/ and build dist/
 node scripts/serve.mjs          # serve dist/ at http://localhost:8788 (mimics Cloudflare)
 npm test                        # logic tests: search, filters, storage, catalog validation
-node scripts/e2e.mjs            # 37 headless-Chrome tests against a local server
+node scripts/e2e.mjs            # 58 headless-Chrome tests against a local server (incl. every game played in its page and fake-controller tests)
 BASE_URL=https://gameatlas.freewebtoolss.workers.dev node scripts/e2e.mjs   # same tests, live site
 node scripts/check-sources.mjs  # check every game's source link and Steam facts
+node scripts/fetch-images.mjs   # fetch official artwork for listed games -> assets/games + data/images.json
+node scripts/capture-originals.mjs  # gameplay screenshots for GameAtlas Originals (after a build)
 node scripts/render-images.mjs  # re-render OG images + favicons into assets/ (after a build)
 npx wrangler deploy             # builds, then uploads dist/ to Cloudflare
 ```
@@ -63,7 +67,7 @@ test/logic.test.mjs   node:test unit tests
 2. Write the `summary` (max 110 characters) and `description` yourself. Never paste store text.
 3. `sourceUrl` must be the official store page, official site or publisher page. For Steam games also set `steamAppId`.
 4. Run `node scripts/check-sources.mjs`, then `npm test` and `node scripts/build.mjs`.
-5. Run `node scripts/render-images.mjs` to make its share image.
+5. Run `node scripts/fetch-images.mjs <slug>` for its official artwork, then `node scripts/build.mjs` and `node scripts/render-images.mjs <slug>` for its share image.
 
 | Field | Meaning |
 | --- | --- |
@@ -99,8 +103,8 @@ The site never requires an account. V1 has no auth backend: the header's "Log in
 
 ## GameAtlas Originals
 
-`src/play/<slug>/` holds small original games (Paddle Duel, Four in a Row, Light Trails, Reflex Party, Memory Pairs, Dots and Boxes, Loop Racer). They are plain classic scripts sharing `src/play/shared/shell.js`, run in a sandboxed iframe (`allow-scripts` only), and never show ads. Fullscreen targets only the game frame; browsers without the Fullscreen API (iPhone) get a fixed-position fallback with an exit bar above, not over, the game.
+`src/play/<slug>/` holds small original games (Paddle Duel, Four in a Row, Light Trails, Reflex Party, Memory Pairs, Dots and Boxes, Loop Racer, Serpent, Brick Breaker, Air Hockey, Mine Field, Block Drop, Tank Duel). The shared shell gives every game controller support (D-pad/stick through menus and boards, A select, Start pause, Select returns to the page), and touch controls on phones. They are plain classic scripts sharing `src/play/shared/shell.js`, run in a sandboxed iframe (`allow-scripts allow-same-origin allow-pointer-lock`: no pop-ups or top navigation, but a real origin so the Gamepad API works), and never show ads. Fullscreen targets only the game frame; browsers without the Fullscreen API (iPhone) get a fixed-position fallback with an exit bar above, not over, the game.
 
 ## Content policy
 
-No scraped descriptions, screenshots or artwork: cover images are generated (`scripts/lib/covers.mjs`) and every description is original. Third-party games are only linked, never embedded or re-hosted. Each game page names its source and says GameAtlas doesn't own the game.
+Every description is original. Game images are the publishers' official artwork (Steam store capsule or the official page's share image), fetched by `scripts/fetch-images.mjs`, recorded with source and credit in `data/images.json`, and credited on each game page; a few browser games without share images use a capture of their own title screen. Originals use gameplay screenshots from `scripts/capture-originals.mjs`. Generated SVG covers (`scripts/lib/covers.mjs`) remain as a fallback. Third-party games are only linked, never embedded or re-hosted.

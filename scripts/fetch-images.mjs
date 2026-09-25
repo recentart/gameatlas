@@ -137,7 +137,7 @@ async function main() {
         url = g.sourceUrl;
         ({ bytes, type } = await screenshotOf(g.sourceUrl, o));
       } else {
-        from = steamId ? 'Steam store page' : `${g.sourceName === 'Official site' ? 'official site' : g.sourceName}`;
+        from = steamId ? 'Steam store page' : ({ 'Official site': 'official site', Nintendo: 'Nintendo store page', 'itch.io': 'itch.io page', 'The New York Times': 'official site' }[g.sourceName] || `${g.sourceName} page`);
         url = steamId ? await steamImage(steamId) : await officialImage(g.sourceUrl);
         if (!url) throw new Error('no official image found');
         ({ bytes, type } = await download(url));

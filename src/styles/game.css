@@ -54,8 +54,8 @@
 .player-start:hover .player-start-icon { transform: scale(1.06); }
 .player-start:focus-visible { outline-offset: -6px; }
 .player-bar { display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 14px; background: var(--surface); border-top: 1px solid var(--border); flex-wrap: wrap; }
-.player-note { margin: 0; font-size: .82rem; color: var(--text-2); display: flex; gap: 6px; align-items: center; }
-.player-note .i { width: 15px; height: 15px; }
+.player-note { margin: 0; font-size: .82rem; color: var(--text-2); flex: 1 1 260px; }
+.player-note .i { width: 15px; height: 15px; display: inline-block; vertical-align: -3px; margin-right: 5px; }
 .player-controls { margin-left: auto; display: flex; gap: 6px; }
 .player-bar-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 10px; background: #0b0d12; color: #fff; font-weight: 700; height: 44px; }
 .btn-outline-light { background: transparent; color: #fff; border-color: rgb(255 255 255 / 40%); }

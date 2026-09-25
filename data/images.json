@@ -47,6 +47,14 @@
     "size": "1280x720",
     "fetched": "2026-09-25"
   },
+  "alien-isolation": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/214490/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/214490/",
+    "credit": "Artwork © Creative Assembly and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "amnesia-the-dark-descent": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/57300/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -63,11 +71,27 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "animal-crossing-new-horizons": {
+    "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000027619/9989957eae3a6b545194c42fec2071675c34aadacd65e6b33fdfe7b3b6a86c3a",
+    "from": "Nintendo store page",
+    "page": "https://www.nintendo.com/us/store/products/animal-crossing-new-horizons-switch/",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
+    "size": "2400x1350",
+    "fetched": "2026-09-25"
+  },
   "apex-legends": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/capsule_616x353.jpg",
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/1172470/",
     "credit": "Artwork © Respawn Entertainment and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "art-of-rally": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/550320/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/550320/",
+    "credit": "Artwork © Funselektor Labs and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -119,6 +143,14 @@
     "size": "1280x720",
     "fetched": "2026-09-25"
   },
+  "boomerang-fu": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/965680/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/965680/",
+    "credit": "Artwork © Cranky Watermelon and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "brawl-stars": {
     "url": "https://supercell.com/images/b524ca49e8549e5d3f5485452da7f26c/cropped.png",
     "from": "official site",
@@ -149,6 +181,22 @@
     "page": "https://store.steampowered.com/app/2835570/",
     "credit": "Artwork © Mike Klubnika and/or its publisher, from the Steam store page",
     "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "burnout-paradise-remastered": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238080/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1238080/",
+    "credit": "Artwork © Criterion Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "candy-crush-saga": {
+    "url": "https://candycrush.com/ccs-og.jpg",
+    "from": "official site",
+    "page": "https://www.candycrush.com/",
+    "credit": "Artwork © King and/or its publisher, from the official site",
+    "size": "1200x630",
     "fetched": "2026-09-25"
   },
   "castle-crashers": {
@@ -215,6 +263,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "core-keeper": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1621690/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1621690/",
+    "credit": "Artwork © Pugstorm and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "counter-strike-2": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -271,6 +327,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "donkey-kong-bananza": {
+    "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch2/70010000096809/3c8219fbdcd3bdd0ebd6239cf32c651fe10f2157aa7730fcc6a7d96cd27460e5",
+    "from": "Nintendo store page",
+    "page": "https://www.nintendo.com/us/store/products/donkey-kong-bananza-switch-2/",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
+    "size": "2400x1350",
+    "fetched": "2026-09-25"
+  },
   "dont-starve-together": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322330/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -311,6 +375,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "dungeon-defenders-awakened": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1101190/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1101190/",
+    "credit": "Artwork © Chromatic Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "elden-ring": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -319,11 +391,27 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "enshrouded": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1203620/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1203620/",
+    "credit": "Artwork © Keen Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "euro-truck-simulator-2": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227300/capsule_616x353.jpg",
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/227300/",
     "credit": "Artwork © SCS Software and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "factorio": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/427520/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/427520/",
+    "credit": "Artwork © Wube Software and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -367,6 +455,14 @@
     "size": "1280x720",
     "fetched": "2026-09-25"
   },
+  "frostpunk": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/323190/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/323190/",
+    "credit": "Artwork © 11 bit studios and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "gang-beasts": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/285900/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -391,6 +487,14 @@
     "size": "1200x630",
     "fetched": "2026-09-25"
   },
+  "geometry-dash": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/322170/",
+    "credit": "Artwork © RobTop Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "golf-with-your-friends": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/431240/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -404,6 +508,14 @@
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/962130/",
     "credit": "Artwork © Obsidian Entertainment and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "guilty-gear-strive": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1384160/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1384160/",
+    "credit": "Artwork © Arc System Works and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -463,6 +575,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "hot-wheels-unleashed": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1271700/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1271700/",
+    "credit": "Artwork © Milestone and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "human-fall-flat": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/477160/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -519,6 +639,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "kingdom-rush-frontiers": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/458710/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/458710/",
+    "credit": "Artwork © Ironhide Game Studio and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "krunker-io": {
     "url": "https://assets.krunker.io/promo/og_1200x630.jpg",
     "from": "official site",
@@ -548,6 +676,14 @@
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/1966720/",
     "credit": "Artwork © Zeekerss and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "lethal-league-blaze": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/553310/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/553310/",
+    "credit": "Artwork © Team Reptile and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -593,17 +729,25 @@
   },
   "mario-kart-8-deluxe": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000000153/de697f487a36d802dd9a5ff0341f717c8486221f2f1219b675af37aca63bc453",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/mario-kart-8-deluxe-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
+    "size": "2400x1350",
+    "fetched": "2026-09-25"
+  },
+  "mario-kart-world": {
+    "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch2/70010000095431/0485f410193ca12f92a2f615ea608bb437540f321bd05e464593c33fefa09bf2",
+    "from": "Nintendo store page",
+    "page": "https://www.nintendo.com/us/store/products/mario-kart-world-switch-2/",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   },
   "mario-party-superstars": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000042934/ae43ce2e25afbc4c069c2920075ead01a84f02dfe55b87876268409f6ccc0304",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/mario-party-superstars-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   },
@@ -625,9 +769,9 @@
   },
   "mindustry": {
     "url": "https://img.itch.zone/aW1nLzI2NjkyMjUxLnBuZw==/original/J8v5gE.png",
-    "from": "itch.io",
+    "from": "itch.io page",
     "page": "https://anuke.itch.io/mindustry",
-    "credit": "Artwork © Anuke and/or its publisher, from the itch.io",
+    "credit": "Artwork © Anuke and/or its publisher, from the itch.io page",
     "size": "630x500",
     "fetched": "2026-09-25"
   },
@@ -671,6 +815,38 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "monster-train": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1102190/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1102190/",
+    "credit": "Artwork © Shiny Shoe and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "mortal-kombat-1": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1971870/",
+    "credit": "Artwork © NetherRealm Studios and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "moving-out": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/996770/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/996770/",
+    "credit": "Artwork © SMG Studio and DevM Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "need-for-speed-unbound": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1846380/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1846380/",
+    "credit": "Artwork © Criterion Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "nidhogg-2": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/535520/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -681,10 +857,18 @@
   },
   "nintendo-switch-sports": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000049931/282ce6a96d5855d8b46aa9316314969f731a26ef9c7b2bc1e5aebe62dcf2ece2",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/nintendo-switch-sports-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
+    "fetched": "2026-09-25"
+  },
+  "orcs-must-die-3": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1522820/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1522820/",
+    "credit": "Artwork © Robot Entertainment and/or its publisher, from the Steam store page",
+    "size": "616x353",
     "fetched": "2026-09-25"
   },
   "outer-wilds": {
@@ -711,6 +895,38 @@
     "size": "1280x720",
     "fetched": "2026-09-25"
   },
+  "palworld": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1623730/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1623730/",
+    "credit": "Artwork © Pocketpair and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "party-animals": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1260320/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1260320/",
+    "credit": "Artwork © Recreate Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "payday-2": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/218620/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/218620/",
+    "credit": "Artwork © Overkill Software and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "peak": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3527290/31bac6b2eccf09b368f5e95ce510bae2baf3cfcd/header.jpg?t=1786470571",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/3527290/",
+    "credit": "Artwork © Aggro Crab and Landfall and/or its publisher, from the Steam store page",
+    "size": "460x215",
+    "fetched": "2026-09-25"
+  },
   "phasmophobia": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/739630/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -735,6 +951,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "plants-vs-zombies-replanted": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3654560/2a3015b525e5d4da6d2c1a517d0a8c1504b1eee8/header.jpg?t=1763401327",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/3654560/",
+    "credit": "Artwork © PopCap Games and/or its publisher, from the Steam store page",
+    "size": "460x215",
+    "fetched": "2026-09-25"
+  },
   "portal-2": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -748,6 +972,14 @@
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/1290000/",
     "credit": "Artwork © FuturLab and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "pummel-party": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/880940/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/880940/",
+    "credit": "Artwork © Rebuilt Games and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -783,6 +1015,46 @@
     "size": "1280x720",
     "fetched": "2026-09-25"
   },
+  "rematch": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2138720/cafe24aa9b3c329c4a083b017cbdd7965b6e23c3/header_alt_assets_1.jpg?t=1790262307",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/2138720/",
+    "credit": "Artwork © Sloclap and/or its publisher, from the Steam store page",
+    "size": "460x215",
+    "fetched": "2026-09-25"
+  },
+  "repo": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3241660/1ea445e044a2d5b09cfa8291350b63ebed6e5741/header.jpg?t=1778158882",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/3241660/",
+    "credit": "Artwork © semiwork and/or its publisher, from the Steam store page",
+    "size": "460x215",
+    "fetched": "2026-09-25"
+  },
+  "resident-evil-4": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/2050650/",
+    "credit": "Artwork © Capcom and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "rimworld": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/294100/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/294100/",
+    "credit": "Artwork © Ludeon Studios and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "risk-of-rain-2": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/632360/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/632360/",
+    "credit": "Artwork © Hopoo Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "rivals-of-aether": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383980/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -796,6 +1068,14 @@
     "from": "Steam store page",
     "page": "https://www.rocketleague.com/",
     "credit": "Artwork © Psyonix and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "satisfactory": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/526870/",
+    "credit": "Artwork © Coffee Stain Studios and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -841,9 +1121,9 @@
   },
   "snipperclips": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000000142/b692e801076e7a4be1a87a2135d20bc5414b639de0cf1e44e91d67a6ca9f7229",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/snipperclips-cut-it-out-together-switch/",
-    "credit": "Artwork © SFB Games and/or its publisher, from the Nintendo",
+    "credit": "Artwork © SFB Games and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   },
@@ -861,6 +1141,14 @@
     "page": "https://store.steampowered.com/app/418530/",
     "credit": "Artwork © Mossmouth and/or its publisher, from the Steam store page",
     "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "splatoon-3": {
+    "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000046395/94a4095cda06c4d85c637d1af451979f9933302b6b17174d97c45de7a68584a2",
+    "from": "Nintendo store page",
+    "page": "https://www.nintendo.com/us/store/products/splatoon-3-switch/",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
+    "size": "2400x1350",
     "fetched": "2026-09-25"
   },
   "split-fiction": {
@@ -903,19 +1191,43 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "subway-surfers": {
+    "url": "https://subwaysurfers.com/media/2dzh0w1i/subway_surfers_keyart_open_graph_image.jpg",
+    "from": "official site",
+    "page": "https://subwaysurfers.com/",
+    "credit": "Artwork © SYBO and/or its publisher, from the official site",
+    "size": "1200x605",
+    "fetched": "2026-09-25"
+  },
+  "super-bunny-man": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/673750/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/673750/",
+    "credit": "Artwork © Catobyte and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "super-mario-bros-wonder": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000068688/87e8aa5f1fdc950b88eae7d7c62ed185c8a6373c845090bbdb2e2cf039b38da1",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/super-mario-bros-wonder-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
+    "size": "2400x1350",
+    "fetched": "2026-09-25"
+  },
+  "super-mario-party-jamboree": {
+    "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000084608/ba0572bf9d840b03bf9958809943fb3c76c3adfd6d8f2704b0f1b766f8aa4027",
+    "from": "Nintendo store page",
+    "page": "https://www.nintendo.com/us/store/products/super-mario-party-jamboree-switch/",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   },
   "super-smash-bros-ultimate": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000012332/ac4d1fc9824876ce756406f0525d50c57ded4b2a666f6dfe40a6ac5c3563fad9",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/super-smash-bros-ultimate-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   },
@@ -975,6 +1287,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "the-outlast-trials": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1304930/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1304930/",
+    "credit": "Artwork © Red Barrels and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "the-sims-4": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222670/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -991,6 +1311,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "ticket-to-ride": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2477010/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/2477010/",
+    "credit": "Artwork © Marmalade Game Studio and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "towerfall-ascension": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/251470/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -1004,6 +1332,14 @@
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/1291340/",
     "credit": "Artwork © Oskar Stålberg and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "tricky-towers": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/437920/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/437920/",
+    "credit": "Artwork © WeirdBeard and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -1031,11 +1367,27 @@
     "size": "1292x728",
     "fetched": "2026-09-25"
   },
+  "uno": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/470220/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/470220/",
+    "credit": "Artwork © Ubisoft and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "unpacking": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1135690/capsule_616x353.jpg",
     "from": "Steam store page",
     "page": "https://store.steampowered.com/app/1135690/",
     "credit": "Artwork © Witch Beam and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "unrailed": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1016920/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1016920/",
+    "credit": "Artwork © Indoor Astronaut and/or its publisher, from the Steam store page",
     "size": "616x353",
     "fetched": "2026-09-25"
   },
@@ -1071,6 +1423,14 @@
     "size": "616x353",
     "fetched": "2026-09-25"
   },
+  "windjammers-2": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1114290/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/1114290/",
+    "credit": "Artwork © Dotemu and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
   "wingspan": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1054490/capsule_616x353.jpg",
     "from": "Steam store page",
@@ -1081,17 +1441,33 @@
   },
   "wordle": {
     "url": "https://www.nytimes.com/games-assets/v2/assets/wordle/wordle_og_1200x630.png",
-    "from": "The New York Times",
+    "from": "official site",
     "page": "https://www.nytimes.com/games/wordle/index.html",
-    "credit": "Artwork © The New York Times and/or its publisher, from the The New York Times",
+    "credit": "Artwork © The New York Times and/or its publisher, from the official site",
     "size": "1200x630",
+    "fetched": "2026-09-25"
+  },
+  "wreckfest": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228380/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/228380/",
+    "credit": "Artwork © Bugbear Entertainment and/or its publisher, from the Steam store page",
+    "size": "616x353",
+    "fetched": "2026-09-25"
+  },
+  "xcom-2": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268500/capsule_616x353.jpg",
+    "from": "Steam store page",
+    "page": "https://store.steampowered.com/app/268500/",
+    "credit": "Artwork © Firaxis Games and/or its publisher, from the Steam store page",
+    "size": "616x353",
     "fetched": "2026-09-25"
   },
   "zelda-tears-of-the-kingdom": {
     "url": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000063714/fb30eab428df3fc993b41c76e20f72e4d76d49734d17d31996b5ab61c414b117",
-    "from": "Nintendo",
+    "from": "Nintendo store page",
     "page": "https://www.nintendo.com/us/store/products/the-legend-of-zelda-tears-of-the-kingdom-switch/",
-    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo",
+    "credit": "Artwork © Nintendo and/or its publisher, from the Nintendo store page",
     "size": "2400x1350",
     "fetched": "2026-09-25"
   }
