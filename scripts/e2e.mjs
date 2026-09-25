@@ -310,7 +310,7 @@ await t('embedded game: click to load, fullscreen shows only the game, exit retu
   await p.waitFor(`document.querySelector('[data-player] iframe')`);
   const src = await p.eval(`document.querySelector('[data-player] iframe').getAttribute('src')`);
   assert(src === '/play/paddle-duel', `iframe src ${src}`);
-  assert(await p.eval(`document.querySelector('[data-player] iframe').getAttribute('sandbox') === 'allow-scripts allow-pointer-lock'`), 'sandboxed');
+  assert(await p.eval(`document.querySelector('[data-player] iframe').getAttribute('sandbox') === 'allow-scripts allow-same-origin allow-pointer-lock'`), 'sandboxed (no pop-ups or top navigation)');
   await sleep(600);
   await clickSel(p, '[data-fullscreen]');
   await sleep(500);
@@ -345,6 +345,34 @@ await t('pseudo-fullscreen fallback (no Fullscreen API, e.g. iPhone) keeps contr
   await p.close();
 });
 
+// Each original, played the way visitors play it: embedded in its game page.
+const PROBES = {
+  'paddle-duel': { act: '', ok: 'GA.updates > 30' },
+  'light-trails': { act: '', ok: 'GA.updates > 30' },
+  'loop-racer': { act: '', ok: 'GA.updates > 30' },
+  'four-in-a-row': { act: `document.querySelector('[data-col="3"]').click()`, ok: `document.querySelectorAll('.cell.p0').length === 1 && document.querySelectorAll('.cell.p1').length === 1` },
+  'memory-pairs': { act: `document.querySelector('[data-i="0"]').click(); document.querySelector('[data-i="1"]').click()`, ok: `/Moves 1/.test(document.querySelector('#scores').textContent)` },
+  'dots-and-boxes': { act: `document.querySelector('.line[data-id="h-0-0"]').dispatchEvent(new MouseEvent('click', { bubbles: true }))`, ok: `document.querySelectorAll('.line.taken').length === 2` },
+  'reflex-party': { act: '', ok: `document.querySelector('#rule').textContent.length > 5 && document.querySelectorAll('.zone').length === 2` },
+};
+for (const g of games.filter((x) => x.embedAllowed)) {
+  await t(`embedded game plays inside its page: ${g.title}`, async () => {
+    const p = await open(`/games/${g.slug}`);
+    await clickSel(p, '.player-start');
+    await p.waitFor(`document.querySelector('[data-player] iframe')`);
+    const q = PROBES[g.slug] || { act: '', ok: 'true' };
+    const inFrame = (expr) => p.evalFrame(`/play/${g.slug}`, expr);
+    for (let i = 0; i < 40; i++) { try { if (await inFrame(`!!(window.GA && document.getElementById('start'))`)) break; } catch { /* frame loading */ } await sleep(100); }
+    await inFrame(`document.getElementById('start').click()`);
+    await sleep(300);
+    if (q.act) await inFrame(q.act);
+    let ok = false;
+    for (let i = 0; i < 40 && !ok; i++) { await sleep(150); ok = await inFrame(q.ok); }
+    assert(ok, `game did not progress (${q.ok})`);
+    await noErrors(p, `${g.slug} embedded`);
+    await p.close();
+  });
+}
 for (const g of games.filter((x) => x.embedAllowed)) {
   await t(`original game runs: ${g.title}`, async () => {
     const p = await open(g.embedUrl, { width: 1000, height: 600 });

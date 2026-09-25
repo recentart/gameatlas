@@ -43,7 +43,10 @@
 
   /* Connected gamepads, in index order, as simple objects. */
   GA.pads = function () {
-    var list = (navigator.getGamepads && navigator.getGamepads()) || [];
+    var list = [];
+    // getGamepads() throws where the gamepad permission is blocked (e.g. some embeds);
+    // a game must keep running with keyboard and touch in that case.
+    try { list = (navigator.getGamepads && navigator.getGamepads()) || []; } catch (e) { list = []; }
     var out = [];
     for (var i = 0; i < list.length; i++) {
       var p = list[i];
@@ -60,13 +63,14 @@
   };
 
   /* Fixed-timestep-ish loop with pause. */
+  GA.updates = 0;
   GA.loop = function (update, draw) {
     var last = 0, running = false, paused = false, raf = 0;
     function frame(t) {
       raf = requestAnimationFrame(frame);
       var dt = last ? Math.min((t - last) / 1000, 1 / 20) : 0;
       last = t;
-      if (!paused) update(dt);
+      if (!paused) { update(dt); GA.updates++; }
       draw(paused);
     }
     return {
@@ -110,6 +114,7 @@
       }
       buttons.forEach(function (b) {
         b.type = 'button';
+        b.classList.add('opt');
         b.addEventListener('click', function () {
           var v = b.getAttribute('data-value');
           values[name] = isNaN(Number(v)) ? v : Number(v);

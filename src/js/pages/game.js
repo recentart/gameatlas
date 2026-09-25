@@ -17,11 +17,12 @@ export function init() {
     iframe = document.createElement('iframe');
     iframe.src = src;
     iframe.title = `${title} (game)`;
-    // Our own games only. Sandboxed so a game can never navigate or open pop-ups over GameAtlas.
-    iframe.setAttribute('sandbox', 'allow-scripts allow-pointer-lock');
+    // Our own games only. The sandbox still blocks pop-ups, downloads and navigating
+    // the GameAtlas page; allow-same-origin keeps the game's real origin so the
+    // Gamepad API (granted by allow="gamepad") and keyboard focus work inside the frame.
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-pointer-lock');
     iframe.setAttribute('allow', 'fullscreen; gamepad');
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.addEventListener('load', () => { try { iframe.contentWindow.focus(); } catch { /* opaque origin */ } iframe.focus(); });
+    iframe.addEventListener('load', () => { try { iframe.contentWindow.focus(); } catch { /* not reachable */ } iframe.focus(); });
     frame.replaceChildren(iframe);
     fsBtn.disabled = false;
     restartBtn.disabled = false;

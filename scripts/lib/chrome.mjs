@@ -60,14 +60,32 @@ function openPage(wsUrl, targetId, port) {
       for (const l of listeners) l(msg);
     }
   };
-  const send = async (method, params = {}) => {
+  const send = async (method, params = {}, sessionId) => {
     await ready;
     return new Promise((res, rej) => {
       const n = ++id;
       pending.set(n, { res, rej });
-      ws.send(JSON.stringify({ id: n, method, params }));
+      ws.send(JSON.stringify({ id: n, method, params, ...(sessionId ? { sessionId } : {}) }));
     });
   };
+  // Out-of-process iframes (e.g. embedded games) get their own sessions; their console
+  // errors and exceptions arrive through the same listeners, tagged with msg.sessionId.
+  const frames = [];
+  let contexts = [];
+  listeners.add((m) => {
+    if (m.sessionId) return;
+    if (m.method === 'Runtime.executionContextCreated') contexts.push(m.params.context);
+    if (m.method === 'Runtime.executionContextDestroyed') contexts = contexts.filter((c) => c.id !== m.params.executionContextId);
+    if (m.method === 'Runtime.executionContextsCleared') contexts = [];
+  });
+  listeners.add((m) => {
+    if (m.method !== 'Target.attachedToTarget') return;
+    const sid = m.params.sessionId;
+    frames.push({ sessionId: sid, url: m.params.targetInfo.url });
+    send('Runtime.enable', {}, sid).catch(() => {});
+    send('Log.enable', {}, sid).catch(() => {});
+    send('Runtime.runIfWaitingForDebugger', {}, sid).catch(() => {});
+  });
   const waitEvent = (name, timeout = 15000) => new Promise((res, rej) => {
     const t = setTimeout(() => { listeners.delete(l); rej(new Error(`timeout waiting for ${name}`)); }, timeout);
     const l = (m) => { if (m.method === name) { clearTimeout(t); listeners.delete(l); res(m.params); } };
@@ -77,10 +95,31 @@ function openPage(wsUrl, targetId, port) {
   const page = {
     send,
     on(fn) { listeners.add(fn); return () => listeners.delete(fn); },
+    frames,
+    /** Evaluate in the first iframe document whose URL contains `match` (same- or cross-process). */
+    async evalFrame(match, expression) {
+      const f = frames.find((x) => x.url.includes(match));
+      if (f) {
+        const r = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, f.sessionId);
+        if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+        return r.result.value;
+      }
+      // Same-process iframe: evaluate in that frame's main-world execution context.
+      const tree = await send('Page.getFrameTree');
+      const find = (n) => (n.frame.url.includes(match) ? n.frame : (n.childFrames || []).map(find).find(Boolean));
+      const frame = find(tree.frameTree);
+      if (!frame) throw new Error('frame not found');
+      const ctx = contexts.find((c) => c.auxData?.frameId === frame.id && c.auxData?.isDefault);
+      if (!ctx) throw new Error('frame context not ready');
+      const r = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true, contextId: ctx.id });
+      if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);
+      return r.result.value;
+    },
     async init() {
       await send('Page.enable');
       await send('Runtime.enable');
       await send('Log.enable');
+      await send('Target.setAutoAttach', { autoAttach: true, waitForDebuggerOnStart: false, flatten: true });
       return page;
     },
     async goto(url, { timeout = 20000 } = {}) {
@@ -121,7 +160,9 @@ function openPage(wsUrl, targetId, port) {
       await send('Input.dispatchMouseEvent', { type: 'mouseReleased', x, y, button: 'left', clickCount: 1 });
     },
     async close() {
-      try { ws.close(); } catch { /* ignore */ }
+      // Close the tab and let Chrome end the socket: closing many WebSockets from the
+      // Node side trips a libuv assertion on Windows (Node 24) and kills the run.
+      ws.onmessage = null;
       try { await fetch(`http://127.0.0.1:${port}/json/close/${targetId}`); } catch { /* ignore */ }
     },
   };
