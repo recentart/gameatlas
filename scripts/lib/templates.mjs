@@ -94,7 +94,7 @@ function footer(site) {
 <li><a href="/discover">Discover</a></li><li><a href="/categories">Categories</a></li><li><a href="/multiplayer">Multiplayer</a></li><li><a href="/new">New Games</a></li>
 <li><a href="/saved">Saved games</a></li><li><a href="/about">About &amp; listing policy</a></li><li><a href="${e(site.issuesUrl)}" rel="noopener">Report a mistake</a></li>
 </ul></nav>
-<p class="footer-note">No analytics or tracking. Saved games stay in your browser. Game names and trademarks belong to their owners; GameAtlas links to official sources and only hosts its own original games.</p>
+<p class="footer-note">${site.ads?.adsense?.client ? 'No analytics. Ads are served by Google.' : 'No analytics or tracking.'} Saved games stay in your browser. Game names and trademarks belong to their owners; GameAtlas links to official sources and only hosts its own original games.</p>
 </div>
 </footer>`;
 }
@@ -110,8 +110,19 @@ function searchDialog() {
 </dialog>`;
 }
 
-export function adSlot(id, format) {
-  return `<aside class="ad-slot ad-${format}" data-ad-slot="${id}" data-ad-format="${format}" aria-label="Advertisement"><span class="ad-label">Advertisement</span><div class="ad-box"></div></aside>`;
+// Small labelled banner (468x60, 320x50 on phones). It always contains a house ad
+// for one of the GameAtlas Originals, so it never shows an empty box. When an ad
+// network unit is configured in data/site.json (ads.adsense), src/js/ui/ads.js
+// loads it on top and the house ad stays as the fallback if no ad is served.
+export function adSlot(ctx, id, key = '', exclude = '') {
+  const pool = ctx.originals.filter((g) => g.slug !== exclude);
+  let h = 0;
+  for (const ch of id + key) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const g = pool[h % pool.length];
+  const adsense = ctx.site.ads?.adsense || {};
+  const unit = adsense.client && adsense.slots?.[id];
+  const net = unit ? ` data-ad-client="${e(adsense.client)}" data-ad-unit="${e(unit)}"` : '';
+  return `<aside class="ad-slot" data-ad-slot="${id}"${net} aria-label="Advertisement"><span class="ad-label">Ad</span><div class="ad-box"><a class="house-ad" href="/games/${g.slug}"><img src="${e(imageFor(g, 320).src)}" alt="" width="96" height="54" loading="lazy" decoding="async"><span class="house-text"><strong>${e(g.title)}</strong><span>${e(g.summary)}</span></span><span class="house-cta">Play free</span></a></div></aside>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -191,7 +202,7 @@ ${opts.lead || ''}
 <p>Try removing a filter or searching for something broader.</p>
 <ul class="empty-actions" data-empty-actions></ul>
 </div>
-${adSlot('browse-bottom', 'leaderboard')}
+${adSlot(ctx, 'browse-bottom', opts.h1)}
 ${opts.after || ''}
 </section>
 </div>`;
@@ -331,7 +342,7 @@ ${playCta}
 <section class="prose"><h2>About ${e(game.title)}</h2><p>${e(game.description)}</p></section>
 <section class="prose"><h2>Controls</h2><p>${e(game.controls)}</p></section>
 <section><h2 class="h-small">Tags</h2><ul class="tag-list">${tagLinks.map((t) => `<li><a class="tag" href="${t.href}">${e(t.label)}</a></li>`).join('')}</ul></section>
-${adSlot('game-below', 'leaderboard')}
+${adSlot(ctx, 'game-below', game.slug, game.slug)}
 </div>
 <aside class="game-facts" aria-labelledby="facts-title">
 <h2 id="facts-title" class="h-small">At a glance</h2>

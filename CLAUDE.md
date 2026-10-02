@@ -3,11 +3,11 @@
 Read README.md first: it documents the structure, the data schema, filter semantics and every command.
 
 Rules that matter here:
-- Static site only: no backend, no analytics, no tracking, no npm dependencies, no external requests from pages.
+- Static site only: no backend, no analytics, no tracking, no npm dependencies, no external requests from pages. The one exception is Google AdSense, and only when `ads.adsense.client` is set in data/site.json (see README "Ads").
 - Never copy store descriptions: write original text. Game images are official publisher artwork fetched by `scripts/fetch-images.mjs` (Steam capsule or the official page's share image), credited via `data/images.json`; Originals use real gameplay captured by `scripts/capture-originals.mjs`. Generated SVG covers are only a fallback.
 - Only GameAtlas Originals (`src/play/`) may be embedded. Everything else links to its official source.
 - No login walls, sign-up prompts or account reminders. The only account prompt is the dismissible line on /saved.
-- Ads only in the existing `adSlot()` placements; never in the player, filters, navigation or fullscreen.
+- Ads only in the existing `adSlot()` placements (one small banner near the bottom of home, results and game pages); never in the player, filters, navigation or fullscreen. Keep them small.
 - `src/js/lib/*` is shared by the build and the browser: keep it pure (no DOM at import time).
 - CSP is strict (`style-src 'self'`): no inline `style=""` attributes in HTML or game pages; set styles via CSSOM or classes.
 - Pages use `html_handling: drop-trailing-slash`, so links are `/games/<slug>` (no trailing slash) and game pages reference assets by absolute path.

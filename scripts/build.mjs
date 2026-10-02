@@ -80,7 +80,7 @@ const catalog = {
   games: clientGames,
   taxonomy,
   categories: liveCategories.map(({ slug, name, group, filters }) => ({ slug, name, group, filters })),
-  site: { name: site.name, issuesUrl: site.issuesUrl, accounts: site.accounts.enabled, ads: site.ads },
+  site: { name: site.name, issuesUrl: site.issuesUrl, accounts: site.accounts.enabled },
 };
 const catalogText = JSON.stringify(catalog);
 const version = hashOf(css + jsBundleKey + catalogText);
@@ -97,7 +97,9 @@ out(assets.catalog.slice(1), catalogText);
 const themeScript = "(function(){try{var s=JSON.parse(localStorage.getItem('gameatlas:v1')||'null');var p=s&&s.prefs||{};if(p.theme==='light'||p.theme==='dark')document.documentElement.setAttribute('data-theme',p.theme);if(p.sidebarCollapsed===true)document.documentElement.classList.add('filters-collapsed');}catch(e){}document.documentElement.classList.add('js');})();";
 const themeHash = createHash('sha256').update(themeScript).digest('base64');
 
-const ctx = { site, taxonomy, assets, themeScript };
+const adsense = site.ads?.adsense || {};
+const adsOn = Boolean(adsense.client);
+const ctx = { site, taxonomy, assets, themeScript, originals: games.filter((g) => g.embedAllowed) };
 const genreLabels = labelMap(taxonomy.genres);
 const bySlug = Object.fromEntries(games.map((g) => [g.slug, g]));
 const page = (path, p) => out(path, layout(ctx, p));
@@ -174,10 +176,10 @@ ${strip(ctx, { title: 'Play right here', id: 'h-here', href: '/games/play-on-gam
 <ul class="mode-tiles">${modeTiles.filter((m) => catBySlug[m.slug]).map((m) => `<li><a class="mode-tile" href="/games/${m.slug}"><span class="mt-icon">${icon(m.ic)}</span><span class="mt-text"><span class="mt-label">${m.label}</span><span class="mt-sub">${m.text}</span></span><span class="count">${catCount(m.slug)}</span></a></li>`).join('')}</ul>
 </section>
 ${strip(ctx, { title: 'Quick games', id: 'h-quick', href: '/games/quick', note: 'A full round in under ten minutes.', games: sortStatic(filterGames(games, mergeFilters(emptyFilters(), { length: ['under-10'] })), 'relevance').slice(0, 12) })}
-${adSlot('home-mid', 'leaderboard')}
 ${strip(ctx, { title: 'Free, no download', id: 'h-free', href: '/discover?price=free&feature=no-download', games: sortStatic(filterGames(games, mergeFilters(emptyFilters(), { price: ['free'], features: ['no-download'] })), 'relevance').slice(0, 12) })}
 ${strip(ctx, { title: 'Great with 4 players on one screen', id: 'h-couch', href: '/discover?players=4&mode=local', games: sortStatic(filterGames(games, mergeFilters(emptyFilters(), { players: ['4'], modes: ['local'] })), 'relevance').slice(0, 12) })}
 ${strip(ctx, { title: 'New releases', id: 'h-new', href: '/new', games: sortStatic(games.filter((g) => !g.embedAllowed), 'newest').slice(0, 12) })}
+${adSlot(ctx, 'home-bottom', 'home')}
 </div>`;
 
 page('index.html', {
@@ -334,11 +336,12 @@ page('about.html', {
 <p>Games marked <strong>Play here</strong> are GameAtlas Originals: small games made for this site, whose source code is public. They are the only games embedded on GameAtlas. Other games are never downloaded, copied or re-hosted; we only link to them.</p>
 <p>Fullscreen shows only the game, with no ads, no navigation and no pop-ups on top. Press <kbd>Esc</kbd> to return to the page.</p>
 <h2>Privacy</h2>
-<p>GameAtlas has no analytics, no tracking scripts and no third-party cookies. Favourites, recently played games, saved searches and your theme are stored in your browser's local storage and never leave your device unless you download them yourself.</p>
+<p>GameAtlas has no analytics${adsOn ? '' : ', no tracking scripts and no third-party cookies'}. Favourites, recently played games, saved searches and your theme are stored in your browser's local storage and never leave your device unless you download them yourself.</p>
 <h2>Accounts</h2>
 <p>Nothing here needs an account. Optional sign-in to sync saves between devices may come later; until then you can <a href="/account">move saves with a file</a>.</p>
 <h2>Advertising</h2>
-<p>GameAtlas may show a small number of clearly labelled ads in the future. They will never cover games or filters, never appear inside fullscreen play, never pop up and never auto-play sound. The spaces marked “Advertisement” show where they would go.</p>
+<p>Some pages show one small banner marked “Ad”, near the bottom of the page. Ads never cover games or filters, never appear inside a game or fullscreen play, never pop up and never play sound. When there is no paid ad to show, the banner shows one of our own games instead.</p>
+${adsOn ? `<p>Paid ads are served by Google AdSense, which may use cookies to choose and measure ads. In the UK and EU you are asked for consent first. See <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>.</p>` : ''}
 <h2>Found a mistake?</h2>
 <p>Open an issue on <a href="${e(site.issuesUrl)}" rel="noopener">GitHub</a>. Suggestions for games to add are welcome too.</p>
 </div>`,
@@ -368,11 +371,18 @@ ${urls.map((u) => `<url><loc>${site.baseUrl}${u}</loc><lastmod>${today}</lastmod
 `);
 out('robots.txt', `User-agent: *\nAllow: /\nDisallow: /saved\nDisallow: /account\n\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 
+// Without an ad network the site makes no third-party requests at all. Setting
+// ads.adsense.client in data/site.json opens the CSP to Google's ad domains only.
+const google = 'https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google';
 const csp = [
-  "default-src 'self'", `script-src 'self' 'sha256-${themeHash}'`, "style-src 'self'", "img-src 'self' data:",
-  "font-src 'self'", "connect-src 'self'", "frame-src 'self'", "frame-ancestors 'self'", "base-uri 'self'",
-  "form-action 'self'", "object-src 'none'",
+  "default-src 'self'",
+  `script-src 'self' 'sha256-${themeHash}'${adsOn ? ` ${google} https://*.gstatic.com` : ''}`,
+  adsOn ? "style-src 'self' 'unsafe-inline'" : "style-src 'self'",
+  adsOn ? "img-src 'self' data: https:" : "img-src 'self' data:",
+  "font-src 'self'", `connect-src 'self'${adsOn ? ` ${google}` : ''}`, `frame-src 'self'${adsOn ? ` ${google}` : ''}`,
+  "frame-ancestors 'self'", "base-uri 'self'", "form-action 'self'", "object-src 'none'",
 ].join('; ');
+if (adsOn) out('ads.txt', `google.com, ${adsense.client.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
 out('_headers', `/*
   Content-Security-Policy: ${csp}
   X-Content-Type-Options: nosniff

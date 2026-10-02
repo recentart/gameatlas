@@ -261,6 +261,9 @@ await t('game page (external): details, legitimate source link, save, JSON-LD, c
   const ogRes = await p.eval(`fetch(${JSON.stringify(ogPath)}).then(r => r.status + ' ' + r.headers.get('content-type'))`);
   assert(ogRes.startsWith('200 image/'), `og image ${ogRes}`);
   assert(await p.eval(`document.querySelectorAll('.ad-slot').length === 1 && !document.querySelector('.game-hero .ad-slot')`), 'one ad slot, outside the hero');
+  const ad = await p.eval(`(() => { const s = document.querySelector('.ad-slot'); const r = s.querySelector('.ad-box').getBoundingClientRect(); const a = s.querySelector('a.house-ad'); return { w: Math.round(r.width), h: Math.round(r.height), label: s.querySelector('.ad-label').textContent, href: a && a.getAttribute('href'), offsite: [...document.scripts].some((x) => x.src && !x.src.startsWith(location.origin)) }; })()`);
+  assert(ad.w <= 468 && ad.h <= 60 && ad.label === 'Ad', `small labelled banner ${JSON.stringify(ad)}`);
+  assert(/^\/games\/[a-z0-9-]+$/.test(ad.href || '') && !ad.offsite, `house ad, no third-party scripts ${JSON.stringify(ad)}`);
   await noErrors(p, 'game page');
   await p.close();
 });

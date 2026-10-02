@@ -5,18 +5,27 @@
   "baseUrl": "https://gameatlas.freewebtoolss.workers.dev",
   "repoUrl": "https://github.com/recentart/gameatlas",
   "issuesUrl": "https://github.com/recentart/gameatlas/issues",
-  "searchExamples": ["4 player fighting games", "2 player horror", "party games", "single player games", "quick games", "local racing", "free browser games"],
+  "searchExamples": [
+    "4 player fighting games",
+    "2 player horror",
+    "party games",
+    "single player games",
+    "quick games",
+    "local racing",
+    "free browser games"
+  ],
   "accounts": {
     "enabled": false,
     "note": "No account backend in V1. Everything is stored in the browser; see src/js/lib/account.js for the planned sync interface."
   },
   "ads": {
-    "provider": "placeholder",
-    "slots": {
-      "home-mid": { "format": "leaderboard" },
-      "browse-bottom": { "format": "leaderboard" },
-      "game-below": { "format": "leaderboard" },
-      "game-aside": { "format": "rectangle" }
+    "adsense": {
+      "client": "",
+      "slots": {
+        "home-bottom": "",
+        "browse-bottom": "",
+        "game-below": ""
+      }
     }
   }
 }

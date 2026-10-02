@@ -234,19 +234,30 @@
 .breadcrumbs a { color: var(--text-2); text-decoration: none; }
 .breadcrumbs a:hover { text-decoration: underline; }
 
-/* ---------- ads (placeholder slots; see src/js/ui/ads.js) ---------- */
-.ad-slot { margin: 32px auto; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.ad-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-3); }
-.ad-box {
-  border: 1px dashed var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-2);
-  max-width: 100%;
+/* ---------- ads: one small banner near the bottom of a page (see src/js/ui/ads.js) ---------- */
+.ad-slot { margin: 28px auto 0; width: 468px; max-width: 100%; }
+.ad-label { display: block; font-size: .62rem; line-height: 1; text-transform: uppercase; letter-spacing: .08em; color: var(--text-3); margin: 0 0 3px 2px; }
+.ad-box { position: relative; height: 60px; border-radius: var(--radius-sm); overflow: hidden; }
+.house-ad {
+  display: flex; align-items: center; gap: 10px; height: 100%; padding: 3px 10px 3px 3px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);
+  color: var(--text-2); text-decoration: none; font-size: .8rem;
 }
-.ad-leaderboard .ad-box { width: 728px; height: 90px; }
-.ad-rectangle .ad-box { width: 300px; height: 250px; }
-@media (max-width: 760px) {
-  .ad-leaderboard .ad-box { width: 320px; height: 100px; }
+.house-ad:hover { border-color: var(--border-strong); }
+.house-ad img { width: 96px; height: 54px; flex: none; object-fit: cover; border-radius: calc(var(--radius-sm) - 2px); }
+.house-text { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.house-text strong { color: var(--text); font-weight: 600; }
+.house-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.house-cta { flex: none; font-weight: 600; color: var(--accent-text); }
+.ad-box ins { position: absolute; inset: 0; pointer-events: none; }
+.ad-slot.is-filled .ad-box ins { pointer-events: auto; }
+.ad-slot.is-filled .house-ad { visibility: hidden; }
+@media (max-width: 559px) {
+  .ad-slot { width: 320px; }
+  .ad-box { height: 50px; }
+  .house-ad img { width: 78px; height: 44px; }
+  .house-text span { display: none; }
 }
-.ad-slot.is-filled .ad-box { border: 0; background: none; }
 
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid var(--border); background: var(--surface); margin-top: 48px; }
