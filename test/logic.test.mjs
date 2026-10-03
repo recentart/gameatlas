@@ -198,3 +198,10 @@ test('storage: sanitize rejects junk and export/import merges', () => {
   assert.deepEqual(b.get().favorites.map((f) => f.slug).sort(), ['celeste', 'hades']);
   assert.equal(b.get().savedSearches.length, 1);
 });
+
+test('ad cookie choice is stored only as yes, no or unset', () => {
+  assert.equal(sanitize({ prefs: { adConsent: 'yes' } }).prefs.adConsent, 'yes');
+  assert.equal(sanitize({ prefs: { adConsent: 'no' } }).prefs.adConsent, 'no');
+  assert.equal(sanitize({ prefs: { adConsent: 'maybe' } }).prefs.adConsent, null);
+  assert.equal(sanitize({}).prefs.adConsent, null);
+});

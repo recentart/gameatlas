@@ -249,9 +249,11 @@
 .house-text strong { color: var(--text); font-weight: 600; }
 .house-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .house-cta { flex: none; font-weight: 600; color: var(--accent-text); }
-.ad-box ins { position: absolute; inset: 0; pointer-events: none; }
-.ad-slot.is-filled .ad-box ins { pointer-events: auto; }
+.ad-box iframe { position: absolute; inset: 0; border: 0; opacity: 0; pointer-events: none; }
+.ad-slot.is-filled .ad-box iframe { opacity: 1; pointer-events: auto; }
 .ad-slot.is-filled .house-ad { visibility: hidden; }
+.ad-consent { margin: 4px 2px 0; font-size: .72rem; color: var(--text-3); }
+.ad-consent .link-btn { font-size: inherit; }
 @media (max-width: 559px) {
   .ad-slot { width: 320px; }
   .ad-box { height: 50px; }

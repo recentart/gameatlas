@@ -19,13 +19,11 @@
     "note": "No account backend in V1. Everything is stored in the browser; see src/js/lib/account.js for the planned sync interface."
   },
   "ads": {
-    "adsense": {
-      "client": "",
-      "slots": {
-        "home-bottom": "",
-        "browse-bottom": "",
-        "game-below": ""
-      }
+    "adsterra": {
+      "frameOrigin": "https://gameatlas-ads.freewebtoolss.workers.dev",
+      "host": "",
+      "key468x60": "",
+      "key320x50": ""
     }
   }
 }

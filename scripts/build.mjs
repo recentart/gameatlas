@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { validateCatalog } from './lib/validate.mjs';
 import { coverSvg, siteOgSvg } from './lib/covers.mjs';
 import {
-  layout, browse, strip, countFor, gamePage, gameJsonLd, breadcrumbLd, adSlot, e, icon, sortStatic,
+  layout, browse, strip, countFor, gamePage, gameJsonLd, breadcrumbLd, adSlot, adsterraOn, e, icon, sortStatic,
 } from './lib/templates.mjs';
 import { filterGames, emptyFilters, mergeFilters } from '../src/js/lib/filters.js';
 import { labelMap } from '../src/js/lib/format.js';
@@ -97,8 +97,7 @@ out(assets.catalog.slice(1), catalogText);
 const themeScript = "(function(){try{var s=JSON.parse(localStorage.getItem('gameatlas:v1')||'null');var p=s&&s.prefs||{};if(p.theme==='light'||p.theme==='dark')document.documentElement.setAttribute('data-theme',p.theme);if(p.sidebarCollapsed===true)document.documentElement.classList.add('filters-collapsed');}catch(e){}document.documentElement.classList.add('js');})();";
 const themeHash = createHash('sha256').update(themeScript).digest('base64');
 
-const adsense = site.ads?.adsense || {};
-const adsOn = Boolean(adsense.client);
+const adsOn = adsterraOn(site);
 const ctx = { site, taxonomy, assets, themeScript, originals: games.filter((g) => g.embedAllowed) };
 const genreLabels = labelMap(taxonomy.genres);
 const bySlug = Object.fromEntries(games.map((g) => [g.slug, g]));
@@ -341,7 +340,7 @@ page('about.html', {
 <p>Nothing here needs an account. Optional sign-in to sync saves between devices may come later; until then you can <a href="/account">move saves with a file</a>.</p>
 <h2>Advertising</h2>
 <p>Some pages show one small banner marked “Ad”, near the bottom of the page. Ads never cover games or filters, never appear inside a game or fullscreen play, never pop up and never play sound. When there is no paid ad to show, the banner shows one of our own games instead.</p>
-${adsOn ? `<p>Paid ads are served by Google AdSense, which may use cookies to choose and measure ads. In the UK and EU you are asked for consent first. See <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>.</p>` : ''}
+${adsOn ? `<p>Paid ads come from Adsterra. They load inside a separate, sealed-off frame that can't read this site, can't redirect you and only opens a new tab if you click it. Adsterra may use cookies to choose ads; if you're in the UK or Europe you're asked first, and clearing this site's data in your browser resets that choice.</p>` : ''}
 <h2>Found a mistake?</h2>
 <p>Open an issue on <a href="${e(site.issuesUrl)}" rel="noopener">GitHub</a>. Suggestions for games to add are welcome too.</p>
 </div>`,
@@ -371,18 +370,13 @@ ${urls.map((u) => `<url><loc>${site.baseUrl}${u}</loc><lastmod>${today}</lastmod
 `);
 out('robots.txt', `User-agent: *\nAllow: /\nDisallow: /saved\nDisallow: /account\n\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 
-// Without an ad network the site makes no third-party requests at all. Setting
-// ads.adsense.client in data/site.json opens the CSP to Google's ad domains only.
-const google = 'https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google';
+// Without an ad network the site makes no third-party requests at all. With
+// ads.adsterra filled in, pages may frame the separate ad-frame origin, nothing else.
 const csp = [
-  "default-src 'self'",
-  `script-src 'self' 'sha256-${themeHash}'${adsOn ? ` ${google} https://*.gstatic.com` : ''}`,
-  adsOn ? "style-src 'self' 'unsafe-inline'" : "style-src 'self'",
-  adsOn ? "img-src 'self' data: https:" : "img-src 'self' data:",
-  "font-src 'self'", `connect-src 'self'${adsOn ? ` ${google}` : ''}`, `frame-src 'self'${adsOn ? ` ${google}` : ''}`,
+  "default-src 'self'", `script-src 'self' 'sha256-${themeHash}'`, "style-src 'self'", "img-src 'self' data:",
+  "font-src 'self'", "connect-src 'self'", `frame-src 'self'${adsOn ? ` ${new URL(site.ads.adsterra.frameOrigin).origin}` : ''}`,
   "frame-ancestors 'self'", "base-uri 'self'", "form-action 'self'", "object-src 'none'",
 ].join('; ');
-if (adsOn) out('ads.txt', `google.com, ${adsense.client.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
 out('_headers', `/*
   Content-Security-Policy: ${csp}
   X-Content-Type-Options: nosniff

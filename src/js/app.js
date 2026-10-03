@@ -120,7 +120,7 @@ initExternalPlays();
 const openSearch = initSearchDialog();
 initShortcut(openSearch);
 initHeroSearch();
-initAds();
+initAds(store);
 initGamepadNav({ onFirstConnect: () => toast('Controller connected: D-pad moves, A selects, B goes back, Y searches.') });
 
 const PAGES = {

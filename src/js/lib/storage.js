@@ -15,7 +15,7 @@ export function defaultState() {
     favorites: [],        // [{ slug, at }] newest first
     recent: [],           // [{ slug, at }] newest first, de-duplicated
     savedSearches: [],    // [{ id, name, query, at }]  query = URL search string
-    prefs: { theme: 'system', sidebarCollapsed: false, accountHintDismissed: false },
+    prefs: { theme: 'system', sidebarCollapsed: false, accountHintDismissed: false, adConsent: null }, // adConsent: null | 'yes' | 'no'
     updatedAt: 0,
   };
 }
@@ -52,6 +52,7 @@ export function sanitize(input) {
   base.prefs.theme = ['light', 'dark', 'system'].includes(p.theme) ? p.theme : 'system';
   base.prefs.sidebarCollapsed = p.sidebarCollapsed === true;
   base.prefs.accountHintDismissed = p.accountHintDismissed === true;
+  base.prefs.adConsent = p.adConsent === 'yes' || p.adConsent === 'no' ? p.adConsent : null;
   base.updatedAt = time(input.updatedAt);
   return base;
 }

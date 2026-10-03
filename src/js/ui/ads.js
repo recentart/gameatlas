@@ -2,10 +2,12 @@
 // contains a house ad (one of the GameAtlas Originals), so nothing here is needed
 // for the site to look right.
 //
-// Paid ads: set ads.adsense.client and a unit id per slot in data/site.json. The
-// build then adds data-ad-client/data-ad-unit to the slot, opens the CSP to
-// Google's ad domains and writes ads.txt; this file loads the unit on top of the
-// house ad and removes it again if Google has no ad to show.
+// Paid ads (Adsterra): fill in ads.adsterra in data/site.json. The build then adds
+// data-ad-* attributes to each slot and allows the ad-frame origin in frame-src.
+// This file puts a sandboxed iframe from that separate origin (ad-frame/, its own
+// Worker) on top of the house ad, and only shows it once the frame reports that an
+// ad rendered. Ad code never runs on GameAtlas pages and cannot navigate them.
+// Visitors whose time zone is in Europe are asked before ad cookies are used.
 //
 // Another network can be plugged in with registerAdProvider({ name, render(slotEl) }).
 //
@@ -22,45 +24,86 @@ export function registerAdProvider(p) {
   provider = p;
 }
 
-let adsenseLoaded = false;
-const adsense = {
-  name: 'adsense',
-  render(slot) {
-    const box = slot.querySelector('.ad-box');
-    const ins = document.createElement('ins');
-    ins.className = 'adsbygoogle';
-    ins.dataset.adClient = slot.dataset.adClient;
-    ins.dataset.adSlot = slot.dataset.adUnit;
-    // Fixed banner size, set through CSSOM because the CSP allows no inline style attributes.
-    ins.style.display = 'block';
-    ins.style.width = `${box.clientWidth}px`;
-    ins.style.height = `${box.clientHeight}px`;
-    box.append(ins);
-    new MutationObserver(() => {
-      const status = ins.getAttribute('data-ad-status');
-      if (status === 'filled') slot.classList.add('is-filled');
-      else if (status === 'unfilled') ins.remove();
-    }).observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
-    if (!adsenseLoaded) {
-      adsenseLoaded = true;
-      const s = document.createElement('script');
-      s.async = true;
-      s.crossOrigin = 'anonymous';
-      s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(slot.dataset.adClient)}`;
-      document.head.append(s);
-    }
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+function needsConsent() {
+  try {
+    return /^Europe\//.test(Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+  } catch {
+    return false;
+  }
+}
+
+function loadFrame(slot) {
+  const box = slot.querySelector('.ad-box');
+  const wide = box.clientWidth >= 468;
+  const key = wide ? slot.dataset.adKeyWide : slot.dataset.adKeyNarrow;
+  if (!key || box.querySelector('iframe')) return;
+  const [w, h] = wide ? [468, 60] : [320, 50];
+  const src = new URL('/frame', slot.dataset.adFrame);
+  src.search = new URLSearchParams({ host: slot.dataset.adHost, key, w, h }).toString();
+  const f = document.createElement('iframe');
+  f.src = src.href;
+  f.width = w;
+  f.height = h;
+  f.title = 'Advertisement';
+  f.loading = 'lazy';
+  f.setAttribute('scrolling', 'no');
+  // Different origin, so allow-same-origin only gives the ad its own cookies.
+  // No allow-top-navigation: an ad can open a new tab when clicked, never redirect this page.
+  f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+  box.append(f);
+}
+
+function askConsent(slot, store) {
+  const p = document.createElement('p');
+  p.className = 'ad-consent';
+  p.append('Ads here use cookies from Adsterra. ');
+  const choose = (answer) => {
+    store.setPref('adConsent', answer);
+    for (const el of document.querySelectorAll('.ad-consent')) el.remove();
+    if (answer === 'yes') for (const s of document.querySelectorAll('[data-ad-frame]')) loadFrame(s);
+  };
+  for (const [label, answer] of [['Allow', 'yes'], ['No thanks', 'no']]) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'link-btn';
+    b.textContent = label;
+    b.addEventListener('click', () => choose(answer));
+    p.append(b, ' ');
+  }
+  slot.append(p);
+}
+
+const adsterra = {
+  name: 'adsterra',
+  render(slot, { store }) {
+    const consent = store && store.getPref('adConsent');
+    if (consent === 'no') return;
+    if (consent !== 'yes' && needsConsent() && store) askConsent(slot, store);
+    else loadFrame(slot);
   },
 };
 
-export function initAds(root = document) {
+let listening = false;
+function listen() {
+  if (listening) return;
+  listening = true;
+  window.addEventListener('message', (e) => {
+    if (!e.data || e.data.type !== 'ga:ad' || !e.data.filled) return;
+    for (const f of document.querySelectorAll('.ad-slot iframe')) {
+      if (f.contentWindow === e.source && new URL(f.src).origin === e.origin) f.closest('.ad-slot').classList.add('is-filled');
+    }
+  });
+}
+
+export function initAds(store, root = document) {
   for (const slot of root.querySelectorAll('[data-ad-slot]')) {
-    const p = slot.dataset.adUnit ? adsense : provider;
+    const p = slot.dataset.adFrame ? adsterra : provider;
     if (!p || rendered.has(slot) || slot.closest('[data-player]')) continue;
     if (document.fullscreenElement) continue;
     rendered.add(slot);
+    if (p === adsterra) listen();
     try {
-      p.render(slot, { id: slot.dataset.adSlot });
+      p.render(slot, { id: slot.dataset.adSlot, store });
     } catch (err) {
       console.warn('Ad provider failed', err);
     }

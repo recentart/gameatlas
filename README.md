@@ -97,13 +97,15 @@ The validator also enforces consistency (a 1-player game can't have multiplayer 
 
 `adSlot()` in `scripts/lib/templates.mjs` renders one small banner labelled "Ad" near the bottom of the home page, every results page and every game page (468×60, 320×50 on phones). Slots are never inside the game player, filters, navigation or fullscreen. Each banner already contains a house ad for one of the GameAtlas Originals, so there is never an empty box.
 
-To earn from them with Google AdSense:
+Paid ads come from Adsterra (banner units only, never popunders or "social bar"):
 
-1. Sign up at https://adsense.google.com, add the site, and create one display ad unit per slot (`home-bottom`, `browse-bottom`, `game-below`).
-2. Put the publisher id and the unit ids in `data/site.json` under `ads.adsense` (`"client": "ca-pub-…"`, `"slots": { "home-bottom": "123…" }`).
-3. Build and deploy. The build adds the units to the slots, opens the Content-Security-Policy to Google's ad domains only, writes `/ads.txt` and switches the About page and footer to say ads are served by Google. In AdSense, turn on "Privacy & messaging" so visitors in the UK and EU are asked for consent.
+1. In the Adsterra publisher account, add the website and create a 468×60 banner unit and a 320×50 banner unit.
+2. From each unit's code, copy the key (`'key' : '…'`) and the host in the `invoke.js` address (e.g. `www.example.com` in `//www.example.com/<key>/invoke.js`) into `data/site.json` under `ads.adsterra` (`host`, `key468x60`, `key320x50`).
+3. Build and deploy. The build adds the units to the slots, allows only the ad-frame origin in `frame-src` and updates the About page and footer.
 
-With `client` empty (the default) the site makes no third-party requests. `src/js/ui/ads.js` loads each unit on top of its house ad and removes it again if Google has nothing to show. Another network can be plugged in with `registerAdProvider()`.
+The ad code never runs on GameAtlas pages. `ad-frame/` is a separate Worker (`gameatlas-ads`, deploy with `npx wrangler deploy -c ad-frame/wrangler.jsonc`) whose `/frame` page loads one banner. `src/js/ui/ads.js` embeds it in a sandboxed iframe without `allow-top-navigation`, so an ad cannot read the page or redirect it, and only shows the frame once it reports that an ad rendered; otherwise the house ad stays. Visitors whose time zone is in Europe get a one-line "Allow / No thanks" choice under the banner before any ad loads (stored as `prefs.adConsent`).
+
+With the keys empty (the default) the site makes no third-party requests. Another network can be plugged in with `registerAdProvider()`.
 
 ## Accounts
 

@@ -94,7 +94,7 @@ function footer(site) {
 <li><a href="/discover">Discover</a></li><li><a href="/categories">Categories</a></li><li><a href="/multiplayer">Multiplayer</a></li><li><a href="/new">New Games</a></li>
 <li><a href="/saved">Saved games</a></li><li><a href="/about">About &amp; listing policy</a></li><li><a href="${e(site.issuesUrl)}" rel="noopener">Report a mistake</a></li>
 </ul></nav>
-<p class="footer-note">${site.ads?.adsense?.client ? 'No analytics. Ads are served by Google.' : 'No analytics or tracking.'} Saved games stay in your browser. Game names and trademarks belong to their owners; GameAtlas links to official sources and only hosts its own original games.</p>
+<p class="footer-note">${adsterraOn(site) ? 'No analytics. Ads are served by Adsterra in a sealed-off frame.' : 'No analytics or tracking.'} Saved games stay in your browser. Game names and trademarks belong to their owners; GameAtlas links to official sources and only hosts its own original games.</p>
 </div>
 </footer>`;
 }
@@ -111,17 +111,21 @@ function searchDialog() {
 }
 
 // Small labelled banner (468x60, 320x50 on phones). It always contains a house ad
-// for one of the GameAtlas Originals, so it never shows an empty box. When an ad
-// network unit is configured in data/site.json (ads.adsense), src/js/ui/ads.js
-// loads it on top and the house ad stays as the fallback if no ad is served.
+// for one of the GameAtlas Originals, so it never shows an empty box. When Adsterra
+// is configured in data/site.json (ads.adsterra), src/js/ui/ads.js loads a banner
+// on top and the house ad stays as the fallback if no ad is served.
+export function adsterraOn(site) {
+  const at = site.ads?.adsterra || {};
+  return Boolean(at.frameOrigin && at.host && (at.key468x60 || at.key320x50));
+}
+
 export function adSlot(ctx, id, key = '', exclude = '') {
   const pool = ctx.originals.filter((g) => g.slug !== exclude);
   let h = 0;
   for (const ch of id + key) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   const g = pool[h % pool.length];
-  const adsense = ctx.site.ads?.adsense || {};
-  const unit = adsense.client && adsense.slots?.[id];
-  const net = unit ? ` data-ad-client="${e(adsense.client)}" data-ad-unit="${e(unit)}"` : '';
+  const at = ctx.site.ads?.adsterra || {};
+  const net = adsterraOn(ctx.site) ? ` data-ad-frame="${e(at.frameOrigin)}" data-ad-host="${e(at.host)}" data-ad-key-wide="${e(at.key468x60 || at.key320x50)}" data-ad-key-narrow="${e(at.key320x50 || at.key468x60)}"` : '';
   return `<aside class="ad-slot" data-ad-slot="${id}"${net} aria-label="Advertisement"><span class="ad-label">Ad</span><div class="ad-box"><a class="house-ad" href="/games/${g.slug}"><img src="${e(imageFor(g, 320).src)}" alt="" width="96" height="54" loading="lazy" decoding="async"><span class="house-text"><strong>${e(g.title)}</strong><span>${e(g.summary)}</span></span><span class="house-cta">Play free</span></a></div></aside>`;
 }
 
