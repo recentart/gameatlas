@@ -100,8 +100,8 @@ The validator also enforces consistency (a 1-player game can't have multiplayer 
 Paid ads come from Adsterra (banner units only, never popunders or "social bar"):
 
 1. In the Adsterra publisher account, add the website and create a 468×60 banner unit and a 320×50 banner unit.
-2. From each unit's code, copy the key (`'key' : '…'`) and the host in the `invoke.js` address (e.g. `www.example.com` in `//www.example.com/<key>/invoke.js`) into `data/site.json` under `ads.adsterra` (`host`, `key468x60`, `key320x50`).
-3. Build and deploy. The build adds the units to the slots, allows only the ad-frame origin in `frame-src` and updates the About page and footer.
+2. From each unit's code, copy the key (`'key' : '…'`) and the script address (`<script src="…">`) into `data/site.json` under `ads.adsterra.units["468x60"]` / `["320x50"]` (`key`, `src`). A size left empty keeps showing the house ad on screens of that width.
+3. Build, then deploy both Workers: `npx wrangler deploy -c ad-frame/wrangler.jsonc` (the build writes the units into `ad-frame/public/units.js`) and `npx wrangler deploy`. The build adds the units to the slots, allows only the ad-frame origin in `frame-src` and updates the About page and footer.
 
 The ad code never runs on GameAtlas pages. `ad-frame/` is a separate Worker (`gameatlas-ads`, deploy with `npx wrangler deploy -c ad-frame/wrangler.jsonc`) whose `/frame` page loads one banner. `src/js/ui/ads.js` embeds it in a sandboxed iframe without `allow-top-navigation`, so an ad cannot read the page or redirect it, and only shows the frame once it reports that an ad rendered; otherwise the house ad stays. Visitors whose time zone is in Europe get a one-line "Allow / No thanks" choice under the banner before any ad loads (stored as `prefs.adConsent`).
 

@@ -114,9 +114,14 @@ function searchDialog() {
 // for one of the GameAtlas Originals, so it never shows an empty box. When Adsterra
 // is configured in data/site.json (ads.adsterra), src/js/ui/ads.js loads a banner
 // on top and the house ad stays as the fallback if no ad is served.
+// Adsterra units with both a key and a script address, e.g. ['468x60'].
+export function adsterraUnits(site) {
+  const units = site.ads?.adsterra?.units || {};
+  return Object.keys(units).filter((k) => /^\d+x\d+$/.test(k) && units[k].key && units[k].src);
+}
+
 export function adsterraOn(site) {
-  const at = site.ads?.adsterra || {};
-  return Boolean(at.frameOrigin && at.host && (at.key468x60 || at.key320x50));
+  return Boolean(site.ads?.adsterra?.frameOrigin) && adsterraUnits(site).length > 0;
 }
 
 export function adSlot(ctx, id, key = '', exclude = '') {
@@ -125,7 +130,7 @@ export function adSlot(ctx, id, key = '', exclude = '') {
   for (const ch of id + key) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   const g = pool[h % pool.length];
   const at = ctx.site.ads?.adsterra || {};
-  const net = adsterraOn(ctx.site) ? ` data-ad-frame="${e(at.frameOrigin)}" data-ad-host="${e(at.host)}" data-ad-key-wide="${e(at.key468x60 || at.key320x50)}" data-ad-key-narrow="${e(at.key320x50 || at.key468x60)}"` : '';
+  const net = adsterraOn(ctx.site) ? ` data-ad-frame="${e(at.frameOrigin)}" data-ad-units="${e(adsterraUnits(ctx.site).join(' '))}"` : '';
   return `<aside class="ad-slot" data-ad-slot="${id}"${net} aria-label="Advertisement"><span class="ad-label">Ad</span><div class="ad-box"><a class="house-ad" href="/games/${g.slug}"><img src="${e(imageFor(g, 320).src)}" alt="" width="96" height="54" loading="lazy" decoding="async"><span class="house-text"><strong>${e(g.title)}</strong><span>${e(g.summary)}</span></span><span class="house-cta">Play free</span></a></div></aside>`;
 }
 

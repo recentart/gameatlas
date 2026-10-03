@@ -34,12 +34,12 @@ function needsConsent() {
 
 function loadFrame(slot) {
   const box = slot.querySelector('.ad-box');
-  const wide = box.clientWidth >= 468;
-  const key = wide ? slot.dataset.adKeyWide : slot.dataset.adKeyNarrow;
-  if (!key || box.querySelector('iframe')) return;
-  const [w, h] = wide ? [468, 60] : [320, 50];
+  // The banner size that fits this slot: 468x60, or 320x50 on phones.
+  const unit = box.clientWidth >= 468 ? '468x60' : '320x50';
+  if (!(slot.dataset.adUnits || '').split(' ').includes(unit) || box.querySelector('iframe')) return;
+  const [w, h] = unit.split('x').map(Number);
   const src = new URL('/frame', slot.dataset.adFrame);
-  src.search = new URLSearchParams({ host: slot.dataset.adHost, key, w, h }).toString();
+  src.search = new URLSearchParams({ unit }).toString();
   const f = document.createElement('iframe');
   f.src = src.href;
   f.width = w;
